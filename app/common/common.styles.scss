@@ -1,0 +1,32 @@
+$green : #67E5C5;
+$red: #E5371D;
+
+
+[ui-view].ng-enter, [ui-view].ng-leave {
+	/*opacity: 1;*/
+/*    position: absolute;*/
+    -webkit-transition:all .5s ease-in-out;
+    transition:all .5s ease-in-out;
+}
+
+[ui-view].ng-enter {
+    opacity: 0;
+    z-index: 100;
+}
+
+[ui-view].ng-enter-active {
+    opacity: 1;
+    display: block;
+     z-index: 100;
+}
+
+[ui-view].ng-leave {
+    opacity: 1;
+     z-index: 0;
+     display: none;
+}
+
+[ui-view].ng-leave-active {
+    opacity: 0;
+     z-index: 0;
+}

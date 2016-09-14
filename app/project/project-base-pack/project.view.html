@@ -1,0 +1,82 @@
+
+
+
+<nav class="navbar">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" id="menu-toggle">Projects</a>
+    </div>
+
+
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      </ul>
+
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a>Welcome: {{pCtrl.user.username}}</a></li>
+        <li> <a ng-click="pCtrl.logout()">logout</a></li>
+
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div id="wrapper">
+
+
+
+  <!-- ALL PROJECTS -->
+  <!--   <div class="col-sm-3 col-md-2 sidebar" ui-view="allprojects"></div> -->
+  <div class="col-sm-3 col-md-2 sidebar">
+    <div id="sidebar-wrapper">
+      <div class="project-stub" ui-sref="base.projects.dashboard.new">
+       <span class="new-pro-group"> New Project <span id="new-pro-btn" class="circle-btn">+</span></span>
+     </div>
+
+     <div class="project-stub" ng-repeat="project in pCtrl.projects" ui-sref="base.projects.dashboard({proj:project._id})">
+
+
+       <span class="text-2nd"> {{project.title}}</span>
+
+
+     </div>   
+
+   </div>
+ </div>
+
+ <div id="page-content-wrapper">
+  <div class="container-fluid">
+
+<div class="project-container">
+    <!-- Page Content -->
+    <div ui-view="dashboard"></div>
+
+</div>
+  </div>
+  <!-- end project container -->
+
+</div>
+</div>
+
+
+
+
+
+<!-- /#wrapper -->
+
+
+
+
+
+
+<!-- Menu Toggle Script -->

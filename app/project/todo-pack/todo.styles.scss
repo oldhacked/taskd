@@ -1,0 +1,48 @@
+@import '../../common/common.styles';
+
+.title {
+	color: deepskyblue;
+	font-size: 30px;
+	font-weight: 600;
+}
+
+.num-wrapper {
+	padding: 5px 8px;
+	background: #888888;
+	color: aliceblue;
+	margin-top: -5px !important;
+}
+
+.strike {
+	color: grey;
+	text-decoration: line-through;
+}
+
+.chillin {
+	background: #40dbc9;
+}
+
+.warning {
+	background: #ff9553;
+}
+
+.danger {
+	background: #db3030;
+}
+
+.red-text {
+	color: red;
+}
+
+.ace_editor {
+	height: 200px;
+	padding: 20px;
+	width: 500px;
+	margin-left: 60px;
+}
+
+.editor {}
+
+.editFormWrapper {
+	height: 500px;
+}

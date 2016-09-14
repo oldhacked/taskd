@@ -1,0 +1,98 @@
+    <div class="col-xs-12 col-md-6">
+      <div class="panel panel-default ">
+        <div class="panel-heading  aqua-heading">NEW PROJECT</div>
+        <div class="panel-body">
+
+
+
+
+
+
+
+
+
+          <form ng-submit="pCtrl.createNewProj(pCtrl.newProjTitle, pCtrl.newProjClient, pCtrl.newProjDueDate, pCtrl.newProjRate )" class="form-group">
+
+            <div class="col-xs-12">
+
+
+              <input placeholder="Title" class="minimal-input col-xs-12" type="text" ng-model="pCtrl.newProjTitle"/>
+              <div class="v-spacer-20"></div>
+              <input placeholder="Client" class="minimal-input col-xs-12" type="text" ng-model="pCtrl.newProjClient"/>
+              <div class="v-spacer-20"></div> 
+
+            </div>
+
+
+            <div class="col-xs-12">
+
+
+              <input placeholder="Due Date" class="minimal-input col-xs-6" type="text" ng-model="pCtrl.newProjDueDate"/>
+
+       
+
+              <input placeholder="Rate" class="minimal-input col-xs-6" type="text" ng-model="pCtrl.newProjRate"/>
+
+
+
+            </div>
+
+            <div class="col-xs-12">
+
+
+
+              <div class="v-spacer-20"></div>
+
+              <div class="row">
+                <button class="default-btn" type="submit">Create Project</button>
+
+              </div>
+              <div class="v-spacer-20"></div>
+
+              <div class="row">
+                <button class="default-btn">Cancel</button>
+              </div>
+
+
+            </div> 
+
+
+
+          </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 
+      <div class=" btn-container">
+          <div class="sonar-btn1" ng-click="pCtrl.sonarBtn($event)">
+
+            <div class="sonar1"></div>
+            <span class="sonar-txt">beeboop!</span>
+          </div>
+        </div>
+
+        <div class=" btn-container">
+          <div class="sonar-btn1" ng-click="pCtrl.sonarBtn($event)">
+
+            <div class="sonar1"></div>
+            <span class="sonar-txt">beeboop!</span>
+          </div>
+        </div> -->

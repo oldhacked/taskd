@@ -1,0 +1,449 @@
+@import '../../common/common.styles';
+
+$deepGray: #70777C;
+$lighterCoolGray: #EDF1F3;
+$lightCoolGray: #F3F5F6;
+$lightCoolGray2: #F9FAFA;
+
+$info-3rd: #898B8E;
+$offWhite1: #F7F5F3;
+
+//MAIN COLORS
+$aqua: #88CFC3;
+
+//TEXT MIXINS
+$primaryFontSize: 24px !important;
+$secondaryFontSize: 18px !important;
+$tertiaryFontSize: 14px !important;
+
+
+@mixin text-3rd {
+    color: $info-3rd;
+    font-size: 18px;
+    font-weight: 300;
+}
+@mixin titleLightOnDark {
+    color: $offWhite1 !important;
+    font-size: $primaryFontSize;
+    font-weight: 300 !important;
+}
+
+
+
+@mixin secondaryLightOnDark{
+    color: $offWhite1 !important;
+    font-size: $secondaryFontSize;
+    font-weight: 300 !important;
+}
+
+@mixin secondaryDarkOnLight{
+    color: $info-3rd !important;
+    font-size: $secondaryFontSize;
+    font-weight: 300 !important;
+}
+
+//POSITIONING MIXINS
+@mixin hv-center {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+
+
+//BORDER MIXINS
+$noBorder: 0px solid transparent !important;
+$thinLightBorder: 1px solid $lighterCoolGray !important; 
+
+@mixin btm-border{
+    border-top: $noBorder;
+    border-right: $noBorder;
+    border-left: $noBorder;
+    border-bottom: $thinLightBorder;
+}
+
+//INPUT MIXINS
+@mixin input-default-size{
+
+}
+
+
+.minimal-input{
+    @include btm-border;
+    height: 50px;
+    @include secondaryDarkOnLight;
+}
+
+
+
+//INPUTS
+
+
+
+
+
+
+//BUTTONS
+.circle-btn{
+
+    font-family: Roboto !important;
+  font-size: 18px;
+  font-weight: 100;
+  border-radius: 50%;
+  height: 18px;
+  width: 18px;
+padding-left: 3px;
+  color: white;
+  @include hv-center;
+
+}
+#new-pro-btn{
+    background: $aqua;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+
+
+
+
+
+.default-btn {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: none;
+    background: $lighterCoolGray;
+    text-align: center;
+    text-transform: uppercase;
+    @include secondaryDarkOnLight;
+    cursor: pointer;
+    // box-shadow: 0px 15px 10px -10px rgba(0, 0, 0, 0.3);
+    transition: all 200ms ease-in-out;
+}
+.default-btn:hover {
+  background: lighten( $lighterCoolGray, 3%);
+  // transform: scale(1.05);
+  // box-shadow: 0px 25px 15px -15px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+//POSITIONING 
+
+.v-spacer-20{
+    height: 20px;
+}
+
+
+
+
+
+
+
+
+//NAV AND BACKGROUNDS
+
+body {
+    overflow-x: hidden;
+    margin-right: -250px;
+    font-family: Oswald !important;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: #F8F7F7;
+}
+.navbar{
+    border-radius: 0 !important;
+    background: $deepGray !important;
+    position: fixed !important;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    a{
+        @include titleLightOnDark;
+    }
+    
+}
+.project-container{
+    max-width: 900px;
+}
+
+
+
+
+
+
+//PROJECTS SELECTOR
+.project-stub{
+    padding: 15px 10px 15px 30px;
+
+    background: $lightCoolGray;
+    border-bottom: 1px solid lighten( $lightCoolGray, 3%);
+    border-right: 1px solid lighten( $lightCoolGray, 3%);
+    width: 250px;
+    height: 60px;
+    @include text-3rd;
+    cursor:pointer;
+
+}
+.project-stub:hover{
+    background: lighten( $lightCoolGray, 3%);
+}
+
+.new-pro-group{
+    display: inline-flex;
+    // margin-left: -20px;
+}
+
+
+
+
+//PANELS
+.panel, .panel-default{
+    border: $thinLightBorder;
+    box-shadow: none !important;
+}
+
+.panel-heading{
+    text-align: center;
+    border: $noBorder;
+    
+}
+
+.aqua-heading{
+    background: $aqua !important;
+    color: white !important;
+    @include titleLightOnDark;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* SLIDER WRAPPER */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    top: 52px;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: $lightCoolGray2;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 0 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #7F7F7F;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+
+
+
+
+
+/*
+.btn-container{
+  height: 100px;
+  display: flex;
+  @include hv-center;
+}
+
+.sonar-btn1{
+  background: #48E5CF;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  width: 200px;
+  padding: 10px;
+  border: none;
+  height: 40px;
+  overflow: hidden;
+
+
+}
+
+
+.sonar-txt{
+  z-index: 100;
+  position: absolute;
+  margin: 0 auto;
+}
+
+
+
+.sonar1{
+   height: 200px;
+   width: 200px;
+   background: #FFFFFF;
+   border-radius: 50%;
+   z-index: 0;
+   opacity: 0;
+}
+
+
+
+.sonar-btn1 .sonar1.sonar-blink{
+   animation: blink .5s ease-in-out forwards;
+
+}
+
+@keyframes blink{
+  0%{
+     transform: scale(0);
+     transform: scale(0);
+     opacity: .7;
+ }
+
+ 100%{
+     transform: scale(2.3);
+     transform: scale(2.3);
+     opacity: 0;
+ }
+}
+*/
+
+
+
+

@@ -1,0 +1,49 @@
+<h1>welcome {{lCtrl.user.username}}</h1>
+<button class="btn btn-default" ng-click="lCtrl.logout()">Logout</button>
+<button class="btn btn-default" ng-click="lCtrl.goto('/projects')">Projects</button>
+<br>
+
+
+		{{lCtrl.dateTest}}
+<div class="text-center	row" ng-hide="lCtrl.user">
+	<div class="col-xs-8 text-center">
+		<span> {{lCtrl.formAdvisory}}</span>
+	</div>
+	<div class="col-xs-8" ng-hide="lCtrl.signingup">
+		<form ng-submit="lCtrl.login(lCtrl.username, lCtrl.password)" class="form-group">
+			<label><input class="form-control" placeholder="Username" type="text" ng-model="lCtrl.username" required /></label></br>
+			<label><input class="form-control" placeholder="password" type="password" ng-model="lCtrl.password" required/> </label></br>
+			<br>
+			<br>
+			<button class="btn btn-default" type="button" ng-click="lCtrl.suToggle()">Sign Up</button>
+			<button class="btn btn-default" type="submit">Login</button>
+		</form>
+	</div>
+	<div class="col-xs-8" ng-show="lCtrl.signingup">
+		<form ng-submit="lCtrl.signup(lCtrl.newusername,lCtrl.pw2)" class="form-group">
+			<label> <input class="form-control" placeholder="Username" type="text" ng-model="lCtrl.newusername" /></label></br>
+			<label><input type='password'class="form-control" placeholder="password" id='pw1' name='pw1' ng-model='lCtrl.pw1'/></label><br>
+			<label><input type='password' class="form-control" id='pw2' name='pw2'placeholder="confirm password" ng-model='lCtrl.pw2' pw-check='pw1'/></label><br>
+			<div class="msg-block" ng-show="lCtrl.nogo"> <span class="msg-error">Passwords don't match.</span> 
+            </div><br>
+			<button class="btn btn-default" type="button" ng-click="lCtrl.suToggle()">Log in</button>
+			<button class="btn btn-default" type="submit">Submit</button>
+		</form>
+
+	</div>
+
+</div>
+<div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+</div>
+
+
+
+
+
+

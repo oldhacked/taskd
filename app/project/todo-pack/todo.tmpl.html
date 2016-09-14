@@ -1,0 +1,135 @@
+
+
+
+
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading"><b>Tasks</b></div>
+  <div class="panel-body">
+  
+
+     <div class="col-xs-12">
+          Client: {{tCtrl.project.client}}
+        </div>
+        <div class="col-xs-12">
+         Rate: {{tCtrl.project.rate}}
+       </div>
+       <div class="col-xs-12">
+        Due Date:  {{tCtrl.project.duedate}}
+      </div>
+      {{tCtrl.project}}
+<div class="row">
+
+    <!-- <label>todo view<input class="form-control" ng-model="tCtrl.projectId"/></label> -->
+    <div class="col-xs-12">
+        aasfasdf88****************************************************
+        <span class="title">derp asdfasdfasdfasdf</span>
+        <span ng-class="tCtrl.alert" class="num-wrapper"> asdfasdfafd{{tCtrl.numCompleted("false")}}</span>
+        <br>
+    </div>
+
+    <div class="col-xs-12">
+
+
+        <br>
+        <form>
+            <div class="input-group col-xs-12">
+                <input type="text" ng-model="tCtrl.newtask" value="" placeholder="Enter new todo" class="form-control" />
+                <span class="input-group-btn">
+
+
+                    <button type="submit" ng-click="tCtrl.addTodo(tCtrl.newtask)" class="btn btn-default">go</button>
+                </span>
+
+                
+            </div>
+        </form>
+        <!-- /input-group -->
+    </div>
+
+
+
+    <div class="col-xs-12">
+        <br>
+
+
+        Show Completed?
+        <input type="checkbox" ng-model="tCtrl.showCompleted" />
+    </div>
+    
+
+    <div class="col-xs-12">
+        <br>
+        Number of Completed Tasks: <span class="num-wrapper"> {{tCtrl.numCompleted("true")}}</span></div>
+
+
+        
+    </div>
+
+
+    <br>
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="panel panel-default">
+                <table class="table table-striped">
+
+                    <thead>
+                        <th>Todo</th>
+                        <th>Mark </th>
+
+
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="todo in tCtrl.todos | showComp:tCtrl.showCompleted | orderBy:'task'">
+
+                            <td>{{todo.task}}</td>
+                            <td>
+                                <input type="checkbox" ng-model="todo.completed" ng-change="tCtrl.updatestat(todo)"/>
+                            </td>
+
+
+                            <td>
+                                <button class="btn btn-default" type="button" ng-click="tCtrl.update(todo)">Edit</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-default" type="button" ng-click="tCtrl.destroy(todo)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+            <br>
+            <div class=" row editFormWrapper">
+                <div id="editForm" ng-show="tCtrl.editForm" class="col-xs-12">
+
+                    <label>Edit task:
+                        <input type="text" ng-model="tCtrl.taskedit.task" class="form-control" />
+                        <button ng-click="tCtrl.cancel()" class="btn btn-default">
+                            Cancel
+                        </button>
+                        <button class="btn btn-default" ng-click="tCtrl.save(tCtrl.taskedit)">
+                            Save
+                        </button>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+
+        
+    </div>
+
+
+
+
+
+
+  </div>
+  <!-- end panel body -->
+</div>
+<!-- end panel -->

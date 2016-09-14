@@ -1,0 +1,280 @@
+<!-- PROJECT PANEL -->
+<div class="col-xs-12 col-md-6">
+  <div class="panel panel-default ">
+    <div class="panel-heading aqua-heading"><b>{{tCtrl.project.title}}</b> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> </div>
+    <div class="panel-body">
+      <div class="col-xs-12">
+        Client: {{tCtrl.project.client}}
+      </div>
+      <div class="col-xs-12">
+       Rate: {{tCtrl.project.rate}}
+     </div>
+     <div class="col-xs-12">
+      Due Date:  {{tCtrl.project.dueDate}}
+    </div>
+
+    <form ng-submit="pCtrl.createNewProj(pCtrl.newProjTitle, pCtrl.newProjClient, pCtrl.newProjDueDate, pCtrl.newProjRate )" class="form-group">
+
+      <div class="col-xs-12">
+
+
+        <input placeholder="Title" class="minimal-input col-xs-12" type="text" ng-model="pCtrl.newProjTitle"/>
+
+        <input placeholder="Client" class="minimal-input col-xs-12" type="text" ng-model="pCtrl.newProjClient"/>
+
+
+      </div>
+
+
+      <div class="col-xs-12">
+
+
+        <input placeholder="Due Date" class="minimal-input col-xs-6" type="text" ng-model="pCtrl.newProjDueDate"/>
+
+
+        <input placeholder="Rate" class="minimal-input col-xs-6" type="text" ng-model="pCtrl.newProjRate"/>
+
+
+
+      </div>
+
+      <div class="col-xs-12" ng-if="tCtrl.editingProj">
+
+
+
+        <div class="v-spacer-20"></div>
+
+        <div class="row">
+          <button class="default-btn" type="submit">Create Project</button>
+
+        </div>
+        <div class="v-spacer-20"></div>
+
+        <div class="row">
+          <button class="default-btn">Cancel</button>
+        </div>
+
+
+      </div> 
+
+
+
+    </form>
+
+  </div>
+</div>  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- TASK PANEL -->
+<div class="col-xs-12 col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading"><b>Tasks {{tCtrl.numCompleted("false") || 0}}/0</b></div>
+    <div class="panel-body">
+
+
+      <!-- TASK PANEL HEADER -->
+      <div class="row">
+
+        <div class="col-xs-12">
+         <!-- <input type="checkbox" ng-model="tCtrl.showCompleted" /> -->
+         <button class="btn">SHOW COMPLETED</button>
+         <button class="btn"> <span class="new-pro-group">NEW TASK <span id="new-pro-btn" class="circle-btn">+</span></span></button>
+         <select class="form-control">
+          <option value="saab">ALL CATEGORIES</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select> 
+
+
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+    <br>
+    <br>
+    <br>
+
+
+
+    <!-- NEW TASK CONTAINER -->
+    <div class="row">
+     <div class="col-xs-12">
+      New Task <span class="advisory">{{tCtrl.newTaskAdvisory}}</span>
+    </div>
+
+    <form ng-submit="tCtrl.addTodo(tCtrl.newTodoTitle, tCtrl.newTodoHours, tCtrl.newTodoCat, tCtrl.newTodoNotes )">
+
+      <!-- ---------- -->
+      <div class="col-xs-12">
+        <input type="text" placeholder="Task Title" ng-model="tCtrl.newTodoTitle"/ required>
+        <input type="text" placeholder="Hours" ng-model="tCtrl.newTodoHours"/>
+      </div>
+
+      <!-- ------------- -->
+      <div class="col-xs-12">
+        <input type="text" placeholder="Category" ng-model="tCtrl.newTodoCat" />
+      </div>
+
+      <!-- ------------- -->
+
+      <div class="col-xs-12">
+        <textarea placeholder="Notes" ng-model="tCtrl.newTodoNotes"></textarea>
+      </div>
+
+      <!-- ------------- -->
+
+      <div class="col-xs-12">
+        <button class="btn">Cancel</button>
+        <button class="btn" type="submit">Create!</button>
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <!-- ALL TASKS CONTAINER -->
+  <br>
+  {{tCtrl.todos[0].task}}
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <div class="panel panel-default">
+
+
+        <table class="table table-striped">
+
+          <thead>
+            <th>Todo</th>
+            <th>Mark </th>
+
+
+          </thead>
+
+          <tbody>
+
+
+           <tr taskrow data-t="todo" ng-repeat="todo in tCtrl.todos | showComp:tCtrl.showCompleted | orderBy:'task'">
+           </tr>
+
+         </tbody>
+
+       </table>
+
+     </div>
+
+     <br>
+     <div class=" row editFormWrapper">
+      <div id="editForm" ng-show="tCtrl.editForm" class="col-xs-12">
+
+
+
+
+        Edit Task <span class="advisory">{{tCtrl.editTaskAdvisory}}</span>
+        
+
+        <form>
+
+          <!-- ---------- -->
+          <div class="col-xs-12">
+            <input type="hidden" ng-model="tCtrl.taskedit._id"/>
+            <input type="text" placeholder="Task Title" ng-model="tCtrl.taskedit.task"/ required>
+            <input type="text" placeholder="Hours" ng-model="tCtrl.taskedit.hours"/>
+          </div>
+
+          <!-- ------------- -->
+          <div class="col-xs-12">
+            <input type="text" placeholder="Category" ng-model="tCtrl.taskedit.category" />
+          </div>
+
+          <!-- ------------- -->
+
+          <div class="col-xs-12">
+            <textarea placeholder="Notes" ng-model="tCtrl.taskedit.notes"></textarea>
+          </div>
+
+          <!-- ------------- -->
+
+          <div class="col-xs-12">
+            <button ng-click="tCtrl.cancel()" class="btn btn-default">
+              Cancel
+            </button>
+            <button class="btn btn-default" ng-click="tCtrl.save(tCtrl.taskedit)">
+              Save
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+</div>
+<!-- end panel body -->
+</div>
+<!-- end panel -->
+
+
+
+<!-- BASIC PANEL -->
+<div class="col-xs-12 col-md-6">
+  <div class="panel panel-default ">
+    <div class="panel-heading heading-default"></div>
+    <div class="panel-body">
+
+    </div>
+  </div>
+</div>
