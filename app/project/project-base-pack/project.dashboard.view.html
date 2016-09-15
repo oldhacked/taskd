@@ -88,7 +88,7 @@
       <div class="row">
 
         <div class="col-xs-12">
-         <!-- <input type="checkbox" ng-model="tCtrl.showCompleted" /> -->
+         <input type="checkbox" ng-model="tCtrl.showCompleted" />
          <button class="btn">SHOW COMPLETED</button>
          <button class="btn"> <span class="new-pro-group">NEW TASK <span id="new-pro-btn" class="circle-btn">+</span></span></button>
          <select class="form-control">
@@ -273,9 +273,11 @@
 <!-- BASIC PANEL -->
 <div class="col-xs-12 col-md-6">
   <div class="panel panel-default ">
-    <div class="panel-heading heading-default"></div>
+    <div class="panel-heading heading-default">
+      Total Hours
+    </div>
     <div class="panel-body">
-
+      {{tCtrl.totalHours}}
     </div>
   </div>
 </div>

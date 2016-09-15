@@ -33,13 +33,13 @@ function taskrow( $interval) {
 
 				//CALCULATE THE DURATION SINCE LAST START
 				var now = new Date();
-				console.log("last start: " + scope.t.lastStart);
+				// console.log("last start: " + scope.t.lastStart);
 				var d = new Date(scope.t.lastStart);
-				console.log("last as new date: " + d);
+				// console.log("last as new date: " + d);
 				var thenLSUTC = moment().utc(d.toLocaleString()).format("YYYY/MM/DD HH:mm:ssZ");
-				console.log("thenLSUTC" + thenLSUTC);
+				// console.log("thenLSUTC" + thenLSUTC);
 				var nowLSUTC = moment().utc(now.toLocaleString()).format("YYYY/MM/DD HH:mm:ssZ");
-				console.log("nowLSUTC" + nowLSUTC);
+				// console.log("nowLSUTC" + nowLSUTC);
 
 				var ms = moment(now,"YYYY/MM/DD HH:mm:ssZ").diff(moment(d,"YYYY/MM/DD HH:mm:ssZ"));
 				var d = moment.duration(ms);

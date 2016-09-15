@@ -39,6 +39,7 @@ export default function todoCtrl($scope, todoService, $interval, $timeout, authS
 				tCtrl.project = response.data[0];
 				tCtrl.todos = tCtrl.project.tasks;
 				tCtrl.project.dueDate = moment(tCtrl.project.dueDate).fromNow();
+				tallyUp();
 			}, handleError);
 		};
 
@@ -67,13 +68,76 @@ tCtrl.newTaskAdvisory = "test";
 		.then(function (response) {
 			tCtrl.todos = response.data;
 			console.log(response.data);
+			tallyUp();
+
 		});
+
+
+
 	};
 
 
 
+tCtrl.totalHours = 0;
+
+function tallyUp(){
 
 
+	var ms = 0;
+	var totalMs = moment.duration(0, 'ms');
+	function addThenConvert(callback){
+
+		_.forEach(tCtrl.todos, function(value, key) {
+			ms = moment.duration(value.hours).asMilliseconds();
+			console.log("value hours as ms: " + ms);
+			totalMs = moment.duration(totalMs).add(ms, 'milliseconds');
+			console.log(totalMs);
+		});
+
+		callback(totalMs);
+	}
+
+	var convert = function(totes){
+		console.log(totes);
+		var d = moment.duration(totes);
+
+		var x = Math.floor(d.asHours()) 
+		console.log(x);
+		var z = moment.utc(d.asMilliseconds()).format(':mm:ss')
+
+		console.log("total duration: " + x + z);
+		tCtrl.totalHours = x + z;
+	}
+
+	addThenConvert(convert);
+};
+
+
+	$scope.$watch("[todos.hours]", function(newValue, oldValue) {
+
+		console.log(newValue, oldValue);
+
+		tallyUp();
+
+	});
+
+
+
+
+
+
+
+
+
+
+
+//KEEP
+
+// var d = moment.duration(formConcat);
+
+// var x = moment.duration(formConcat).asMilliseconds();
+
+// var dur = Math.floor(d.asHours()) + moment.utc(x).format(":mm:ss");
 
 
 
@@ -94,15 +158,15 @@ tCtrl.newTaskAdvisory = "test";
 
 
 
-	var firstDate = new Date();
+	// var firstDate = new Date();
 
-	var d = moment.duration('01:05:30');
-	var x = moment.duration('01:05:30').asMilliseconds();
-	console.log(x);
-	// var x = moment.utc(d).format(":mm:ss");
-	var y = Math.floor(d.asHours()) + moment.utc(x).format(":mm:ss");
-	// moment.utc(x).format(":mm:ss")
-	console.log("d duration: " + d + " formatted: " + y);
+	// var d = moment.duration('01:05:30');
+	// var x = moment.duration('01:05:30').asMilliseconds();
+	// console.log(x);
+	// // var x = moment.utc(d).format(":mm:ss");
+	// var y = Math.floor(d.asHours()) + moment.utc(x).format(":mm:ss");
+	// // moment.utc(x).format(":mm:ss")
+	// console.log("d duration: " + d + " formatted: " + y);
 	
 
 
@@ -152,17 +216,13 @@ tCtrl.newTaskAdvisory = "test";
 		var formConcat = newTodoHours + ":" + newTodoMin + ":00";
 		console.log("form formConcat: " + formConcat);
 
-		var d = moment.duration(formConcat);
-
-		var x = moment.duration(formConcat).asMilliseconds();
-
-		var dur = Math.floor(d.asHours()) + moment.utc(x).format(":mm:ss");
+		
 
 		var todo = {
 			pid: $scope.pid,
 			task: newTodoTitle,
 			category:  newTodoCat,
-			hours: dur,
+			hours: formConcat,
 			recording: false ,
 			lastStart: null,
 			completed: false,
@@ -258,7 +318,7 @@ tCtrl.newTaskAdvisory = "test";
 			todoService.updatetodo(angular.copy(todo), token)
 			.then(function success(response) {
 				console.log(response);
-
+				tCtrl.loadTodos();
 			});
 		}else if (task.recording == true){
 			var ls = new Date();
@@ -283,9 +343,6 @@ tCtrl.newTaskAdvisory = "test";
 
 		}
 	};
-
-
-
 
 
 

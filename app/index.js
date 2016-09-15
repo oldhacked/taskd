@@ -13,7 +13,7 @@ import ngAnimate from 'angular-animate';
 // require('./common/bootstrap.styles.scss');
 require('./project/project-base-pack/project.styles.scss');
 
-
+import _ from 'lodash';
 //REGISTER
 	//routes
 import routing from './app.config';
