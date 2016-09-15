@@ -14,7 +14,7 @@ var todoSchema = new Schema({
     pid: {type: String, required: true},
     task: {type: String, required: true, maxlength : 100},
     category: {type: String, maxlength: 100},
-    hours: {type: Number, maxlength : 100},
+    hours: {type: String, maxlength : 100},
     recording: {type: Boolean},
     lastStart: {type: Date, maxlength : 100},
     completed: {type : Boolean},

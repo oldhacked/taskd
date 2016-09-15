@@ -121,12 +121,13 @@
       New Task <span class="advisory">{{tCtrl.newTaskAdvisory}}</span>
     </div>
 
-    <form ng-submit="tCtrl.addTodo(tCtrl.newTodoTitle, tCtrl.newTodoHours, tCtrl.newTodoCat, tCtrl.newTodoNotes )">
+    <form ng-submit="tCtrl.addTodo(tCtrl.newTodoTitle, tCtrl.newTodoHours, tCtrl.newTodoMin, tCtrl.newTodoCat, tCtrl.newTodoNotes )">
 
       <!-- ---------- -->
       <div class="col-xs-12">
         <input type="text" placeholder="Task Title" ng-model="tCtrl.newTodoTitle"/ required>
         <input type="text" placeholder="Hours" ng-model="tCtrl.newTodoHours"/>
+        <input type="text" placeholder="Minuts" ng-model="tCtrl.newTodoMin"/>
       </div>
 
       <!-- ------------- -->

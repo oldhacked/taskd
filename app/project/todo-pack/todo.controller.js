@@ -55,13 +55,12 @@ tCtrl.newTaskAdvisory = "test";
 	//tests
 	tCtrl.newTodoTitle = "new task derp face"
 	tCtrl.newTodoCat = "css"
-	tCtrl.newTodoHours = "7";
+	tCtrl.newTodoHours = "00";
+	tCtrl.newTodoMin = "00";
 	
 	tCtrl.newTodoNotes = "notes notes notes... i love notes?";
 
-
-
-
+	
 	tCtrl.loadTodos = function () {
 		console.log("data loaded");
 		tCtrl.getTodos($scope.pid, token)
@@ -74,15 +73,96 @@ tCtrl.newTaskAdvisory = "test";
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+	// var h = moment.duration(newTodoHours);
+
+	// var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
+	// var ndate = new Date();
+	// var thenLSUTC = moment().utc(ndate.toLocaleString()).format("YYYY/MM/DD HH:mm:ssZ");
+	// console.log("************* NEW DATE: " + ndate + " ndate lsUTC: " + thenLSUTC );
+
+
+
+	var firstDate = new Date();
+
+	var d = moment.duration('01:05:30');
+	var x = moment.duration('01:05:30').asMilliseconds();
+	console.log(x);
+	// var x = moment.utc(d).format(":mm:ss");
+	var y = Math.floor(d.asHours()) + moment.utc(x).format(":mm:ss");
+	// moment.utc(x).format(":mm:ss")
+	console.log("d duration: " + d + " formatted: " + y);
+	
+
+
+
+	// var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
+
+	// console.log("duration ms: " + d + " formated: " + s);
+
+	// $timeout(function() {
+	// 	var secondDate = new Date();
+
+
+	// 	var firstLSUTC = moment().utc(firstDate.toLocaleString()).format("YYYY/MM/DD HH:mm:ssZ");
+	// 	var secondLSUTC = moment().utc(secondDate.toLocaleString()).format("YYYY/MM/DD HH:mm:ssZ");
+	// 	var ms = moment(secondLSUTC,"YYYY/MM/DD HH:mm:ssZ").diff(moment(firstLSUTC,"YYYY/MM/DD HH:mm:ssZ"));
+	// 	var d = moment.duration(ms);
+
+	// 	var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
+
+	// 	console.log("duration ms: " + d + " formated: " + s);
+
+
+	// }, 10000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	//ADD TODO
 	tCtrl.newtask;
-	tCtrl.addTodo = function (newTodoTitle, newTodoHours, newTodoCat, newTodoNotes) {
-		console.log("new taks that was added");
+	tCtrl.addTodo = function (newTodoTitle, newTodoHours, newTodoMin, newTodoCat, newTodoNotes) {
+
+		// var h = moment.duration(newTodoHours);
+
+		// var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
+		// console.log("new taks that was added");
+
+		var formConcat = newTodoHours + ":" + newTodoMin + ":00";
+		console.log("form formConcat: " + formConcat);
+
+		var d = moment.duration(formConcat);
+
+		var x = moment.duration(formConcat).asMilliseconds();
+
+		var dur = Math.floor(d.asHours()) + moment.utc(x).format(":mm:ss");
+
 		var todo = {
 			pid: $scope.pid,
 			task: newTodoTitle,
 			category:  newTodoCat,
-			hours: newTodoHours,
+			hours: dur,
 			recording: false ,
 			lastStart: null,
 			completed: false,
@@ -91,15 +171,15 @@ tCtrl.newTaskAdvisory = "test";
 		console.log(todo);
 		todoService.addTodo(todo, token)
 		.then(function success(response) {
-			
+
 			if(response.data){
 				console.log(response.data);
 				tCtrl.newTodoTitle = tCtrl.newTodoHours = tCtrl.newTodoCat = tCtrl.newTodoSdate = tCtrl.newTodoEdate = tCtrl.newTodoNotes = '';
 			}
-			
+
 		} , function (response){tCtrl.newTaskAdvisory = response.data.stat;});
 		tCtrl.loadTodos();
-		
+
 	};
 
 	function handleError(response){
@@ -125,7 +205,7 @@ tCtrl.newTaskAdvisory = "test";
 		todoService.updatetodo(angular.copy(todo), token)
 		.then(function success(response) {
 			tCtrl.loadTodos();
-			
+
 		});
 
 	};
@@ -157,7 +237,7 @@ tCtrl.newTaskAdvisory = "test";
 
 
 
-	tCtrl.toggleRec = function(task){
+	tCtrl.toggleRec = function(task, newTime){
 		console.log("toggling record");
 		if(task.recording == false){
 
@@ -188,7 +268,7 @@ tCtrl.newTaskAdvisory = "test";
 				_id: task._id,
 				task: task.task,
 				category: task.category,
-				hours: task.hours,
+				hours: newTime,
 				lastStart: null,
 				recording: false,
 				completed: task.completed,
@@ -198,7 +278,7 @@ tCtrl.newTaskAdvisory = "test";
 			todoService.updatetodo(angular.copy(todo), token)
 			.then(function success(response) {
 				console.log(response);
-				
+				tCtrl.loadTodos();
 			});
 
 		}

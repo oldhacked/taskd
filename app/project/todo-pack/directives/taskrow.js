@@ -19,29 +19,23 @@ function taskrow( $interval) {
 
 
 			scope.ctrl = scope.$parent.tCtrl;
-			// console.log(scope.update);
 
-			// scope.updatestat = scope.$parent.tCtrl.updatestat;
-			// console.log(scope.t);
-
-			// scope.ctrl = todoCtrl;
-			scope.time = 0;
-
+			//PASS THE PARENT CONTROLLER TO THE DIRECTIVE
 			scope.task = function() {
 
 				return scope.t;
 			};
 
+			
+
 			if(scope.t.recording == true){
 				scope.swctrl.start();
 
-
+				//CALCULATE THE DURATION SINCE LAST START
 				var now = new Date();
 				console.log("last start: " + scope.t.lastStart);
 				var d = new Date(scope.t.lastStart);
-
 				console.log("last as new date: " + d);
-
 				var thenLSUTC = moment().utc(d.toLocaleString()).format("YYYY/MM/DD HH:mm:ssZ");
 				console.log("thenLSUTC" + thenLSUTC);
 				var nowLSUTC = moment().utc(now.toLocaleString()).format("YYYY/MM/DD HH:mm:ssZ");
@@ -53,7 +47,9 @@ function taskrow( $interval) {
 
 				console.log(s);
 
-				scope.swctrl.totalElapsedMs = s;
+				scope.swctrl.setTotalElapsed(scope.task().hours, s);
+
+				// scope.swctrl.totalElapsedMs = s;
 
 
 
@@ -94,6 +90,8 @@ function taskrow( $interval) {
 
 
 
+			}else{
+				scope.swctrl.setTotalElapsed(scope.task().hours, 0);
 			}
 			
 			// scope.t = attrs.title
@@ -113,6 +111,15 @@ function taskrow( $interval) {
 			var time;
 			var recording = false;
 
+
+			self.setTotalElapsed = function(taskTime, pastTime){
+
+
+				totalElapsedMs = moment.duration(taskTime) + moment.duration(pastTime);
+
+
+
+			};
 
 			var count = 0;
 			var d = 0;
@@ -136,7 +143,8 @@ function taskrow( $interval) {
 						console.log("startTime: " + startTime);
 						timerPromise = $interval(function() {
 							var now = new Date();
-							$scope.time = now;
+						
+
 
 
 							var x = (now.getTime() - startTime.getTime());
@@ -192,7 +200,7 @@ function taskrow( $interval) {
 			self.getElapsedMs = function() {
 				var tet =  totalElapsedMs + elapsedMs;
 				var tetMoment = moment.duration(tet);
-				var hms = Math.floor(tetMoment.asHours()) + moment.utc(tet).format(":mm:ss")
+				var hms = Math.floor(tetMoment.asHours()) + moment.utc(tet).format(":mm:ss");
 				
 				return  hms;
 			};

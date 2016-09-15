@@ -13,6 +13,6 @@ Implemented data visualization using Charts.js.
 
 Mockups created in Adobe Illustrator
 
-![alt tag](https://github.com/wezdez/new-taskd/blob/master/taskd-mockups/taskd-login.png)
-![alt tag](https://github.com/wezdez/new-taskd/blob/master/taskd-mockups/expanded-new-task.png)
-![alt tag](https://github.com/wezdez/new-taskd/blob/master/taskd-mockups/taskd-charts-panel.png)
+![alt tag](https://github.com/wezdez/taskd/blob/master/taskd-mockups/taskd-login.png)
+![alt tag](https://github.com/wezdez/taskd/blob/master/taskd-mockups/expanded-new-task.png)
+![alt tag](https://github.com/wezdez/taskd/blob/master/taskd-mockups/taskd-charts-panel.png)

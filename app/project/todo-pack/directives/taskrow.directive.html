@@ -1,11 +1,11 @@
  <td><input ng-model='task().task'/> </td>
  <td> <input type='checkbox' ng-model='task().completed' ng-change='ctrl.updatestat(task())'/> 
- </td><td><button class='btn btn-default' type='button' ng-click='ctrl.update(task())'>Edit</button></td>
- <td><button class='btn btn-default' type='button' ng-click='ctrl.destroy(task())'>Delete</button></td>
+<!--  </td><td><button class='btn btn-default' type='button' ng-click='ctrl.update(task())'>Edit</button></td>
+ <td><button class='btn btn-default' type='button' ng-click='ctrl.destroy(task())'>Delete</button></td> -->
  <td>
 
  	{{swctrl.getElapsedMs() }}
- 	<span id="new-pro-btn" class="circle-btn" class='btn btn-default'  ng-dblclick="swctrl.reset()"  ng-click='swctrl.start(); ctrl.toggleRec(task())'></span>
+ 	<span id="new-pro-btn" class="circle-btn" class='btn btn-default'  ng-dblclick="swctrl.reset()"  ng-click='swctrl.start(); ctrl.toggleRec(task() , swctrl.getElapsedMs())'></span>
 
 
 <!-- 	
