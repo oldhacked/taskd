@@ -79,6 +79,22 @@ $thinLightBorder: 1px solid $lighterCoolGray !important;
 //INPUTS
 
 
+//CHARTS
+.dchart-container{
+  position: relative;
+}
+
+.chart-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;
+  font-weight: 300;
+}
 
 
 

@@ -277,7 +277,13 @@
       Total Hours
     </div>
     <div class="panel-body">
-      {{tCtrl.totalHours}}
+      
+
+        <div class="dchart-container">
+   <label class="chart-title">{{tCtrl.totalHours}}</label>
+  <canvas id="doughnut" class="chart chart-doughnut" chart-data="tCtrl.chartdata"
+  chart-labels="tCtrl.labels"></canvas>
+  </div>
     </div>
   </div>
 </div>

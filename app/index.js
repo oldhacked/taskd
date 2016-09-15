@@ -27,6 +27,11 @@ import project from './project';
 	//direcives
 import taskrow from './project/todo-pack/directives/taskrow.js';
 
+// import chartjs from 'chartjs';
+// import angularChartjs from 'angular-chartjs';
+
+
+
 angular.module('app', [uirouter, login, project, jwt, ngAnimate, taskrow])
 	.run(root)
 	.constant('API_URL','http://localhost:3000')

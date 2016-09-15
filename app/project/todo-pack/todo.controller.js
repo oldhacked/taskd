@@ -382,6 +382,36 @@ function tallyUp(){
     		return nonComp;
     	}
     }
+
+
+
+
+
+
+//////////////CHARTS!!!//////////////////
+tCtrl.labels = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
+
+
+tCtrl.chartdata = [300, 500, 100];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };
 
 todoCtrl.$inject = ['$scope', 'todoService', '$interval', '$timeout', 'authService', '$rootScope', '$stateParams']

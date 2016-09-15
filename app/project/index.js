@@ -21,9 +21,12 @@ import projectService from './project-service/todo.service';
 	//filters
 import showComp from './todo-pack/todo.filter.js';
 
+	//vendor
+
+
 
 	
-export default angular.module('app.project', [uirouter, projectService])
+export default angular.module('app.project', [uirouter, projectService, 'chart.js'])
 // .run(projectRoot)
 
 .config(projectRoutes)

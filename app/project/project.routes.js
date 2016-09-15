@@ -1,5 +1,5 @@
 /* @ngInject */
-export default function projectRoutes($stateProvider, $urlRouterProvider, $locationProvider) {
+export default function projectRoutes($stateProvider, $urlRouterProvider, $locationProvider, ChartJsProvider) {
 
 	$stateProvider
 	.state('base.projects', {
@@ -39,7 +39,20 @@ export default function projectRoutes($stateProvider, $urlRouterProvider, $locat
 			}
 			
 		}
-	})
+	});
+	 ChartJsProvider.setOptions({
+        chartColors: ['#48C1CD','#C1C9CD','#BC79CD']
+    });
+    // Configure all doughnut charts
+    ChartJsProvider.setOptions('doughnut', {
+        cutoutPercentage: 95
+    });
+    ChartJsProvider.setOptions('bubble', {
+        tooltips: { enabled: true }
+    });
+
+
+
 
 	// './todo-pack/todo.tmpl.html'
 
@@ -65,5 +78,5 @@ export default function projectRoutes($stateProvider, $urlRouterProvider, $locat
 
 $urlRouterProvider.otherwise('/');
 }
-projectRoutes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+projectRoutes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', 'ChartJsProvider'];
 
