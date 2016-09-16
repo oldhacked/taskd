@@ -16,6 +16,7 @@ export default function routing($stateProvider, $urlRouterProvider, $locationPro
   $urlRouterProvider.otherwise('/');
 }
 
+
 routing.$inject = ['$stateProvider','$urlRouterProvider', '$locationProvider' ];
 
 

@@ -1,21 +1,84 @@
- <td><input ng-model='task().task'/> </td>
- <td> </td>
+ 	<form>
+ 		<div class="row">
+ 			<input type="hidden" ng-model="task()._id"/>
+ 			<div class="col-xs-4">
+ 				<input ng-model='task().task'/> 
+ 				<input type="text" placeholder="Category" ng-model="task().category" />
+ 			</div>
+
+
+
 <!--  </td><td><button class='btn btn-default' type='button' ng-click='ctrl.update(task())'>Edit</button></td>
- <td><button class='btn btn-default' type='button' ng-click='ctrl.destroy(task())'>Delete</button></td> -->
- <td>{{swctrl.getElapsedMs() }}</td>
- <td>
- <div class="col-xs-12">
- 	<div class="col-xs-4">
-<input type='checkbox' ng-model='task().completed' ng-change='ctrl.updatestat(task())'/> 
+	<td><button class='btn btn-default' type='button' ng-click='ctrl.destroy(task())'>Delete</button></td> -->
+	<div class="col-xs-4">
+		<input type="text" placeholder="Hours" ng-model="task().hours"/>
+		{{swctrl.getElapsedMs() }}
+	</div>
+
+	<div class="col-xs-4">
+		<div class="col-xs-4">
+			<input type='checkbox' ng-model='task().completed' ng-change='ctrl.updatestat(task())'/> 
+		</div>
+		<div class="col-xs-4">
+			<span id="new-pro-btn" class="circle-btn" class='btn btn-default'  ng-dblclick="swctrl.reset()"  ng-click='swctrl.start(); ctrl.toggleRec(task() , swctrl.getElapsedMs())'></span>
+		</div>
+		<div class="col-xs-4">
+			<span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+		</div>	
+	</div>
 </div>
-<div class="col-xs-4">
- 	<span id="new-pro-btn" class="circle-btn" class='btn btn-default'  ng-dblclick="swctrl.reset()"  ng-click='swctrl.start(); ctrl.toggleRec(task() , swctrl.getElapsedMs())'></span>
+
+
+<div class="row">
+
+
+
+
+	<div class="col-xs-8">
+		<div class="col-xs-12">
+			<textarea placeholder="Notes" ng-model="tCtrl.taskedit.notes"></textarea>
+		</div>
+
+		<!-- ------------- -->
+
+		<div class="col-xs-12">
+
+			<button ng-click="tCtrl.cancel()" class="btn btn-default">
+				Edit
+			</button>
+
+			<button ng-click="tCtrl.cancel()" class="btn btn-default">
+				Cancel
+			</button>
+			<button class="btn btn-default" ng-click="tCtrl.save(tCtrl.taskedit)">
+				Save
+			</button>
+		</div>
+	</div>
+
+
+
+
+	<div class="col-xs-4">
+
+
+	
+  <div class="dchart-container">
+      <label class="chart-title">{{swctrl.getElapsedMs() }}</label>
+      <canvas chart-colors="chartcolors" chart-options="chartoptions" class="chart chart-doughnut" chart-data="chartdata"
+      chart-labels="chartlabels"></canvas>
+    </div>
+
+
+
+	</div>
+
+
+	<span class="advisory">{{tCtrl.editTaskAdvisory}}</span>
 </div>
-<div class="col-xs-4">
-	<span class="glyphicon glyphicon-move" aria-hidden="true"></span>
-</div>	
- </div>
-</td>
+</form>
+
+
 
 <!-- 	
 | secondsToDateTime | date:'HH:mm:ss'

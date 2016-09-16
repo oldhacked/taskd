@@ -10,7 +10,7 @@ $offWhite1: #F7F5F3;
 
 //MAIN COLORS
 $aqua: #88CFC3;
-
+$pinkRed: #F3848E;
 //TEXT MIXINS
 $primaryFontSize: 24px !important;
 $secondaryFontSize: 18px !important;
@@ -18,35 +18,35 @@ $tertiaryFontSize: 14px !important;
 
 
 @mixin text-3rd {
-    color: $info-3rd;
-    font-size: 18px;
-    font-weight: 300;
+  color: $info-3rd;
+  font-size: 18px;
+  font-weight: 300;
 }
 @mixin titleLightOnDark {
-    color: $offWhite1 !important;
-    font-size: $primaryFontSize;
-    font-weight: 300 !important;
+  color: $offWhite1 !important;
+  font-size: $primaryFontSize;
+  font-weight: 300 !important;
 }
 
 
 
 @mixin secondaryLightOnDark{
-    color: $offWhite1 !important;
-    font-size: $secondaryFontSize;
-    font-weight: 300 !important;
+  color: $offWhite1 !important;
+  font-size: $secondaryFontSize;
+  font-weight: 300 !important;
 }
 
 @mixin secondaryDarkOnLight{
-    color: $info-3rd !important;
-    font-size: $secondaryFontSize;
-    font-weight: 300 !important;
+  color: $info-3rd !important;
+  font-size: $secondaryFontSize;
+  font-weight: 300 !important;
 }
 
 //POSITIONING MIXINS
 @mixin hv-center {
-   display: flex;
-   align-items: center;
-   justify-content: center;
+ display: flex;
+ align-items: center;
+ justify-content: center;
 }
 
 
@@ -56,10 +56,10 @@ $noBorder: 0px solid transparent !important;
 $thinLightBorder: 1px solid $lighterCoolGray !important; 
 
 @mixin btm-border{
-    border-top: $noBorder;
-    border-right: $noBorder;
-    border-left: $noBorder;
-    border-bottom: $thinLightBorder;
+  border-top: $noBorder;
+  border-right: $noBorder;
+  border-left: $noBorder;
+  border-bottom: $thinLightBorder;
 }
 
 //INPUT MIXINS
@@ -69,9 +69,9 @@ $thinLightBorder: 1px solid $lighterCoolGray !important;
 
 
 .minimal-input{
-    @include btm-border;
-    height: 50px;
-    @include secondaryDarkOnLight;
+  @include btm-border;
+  height: 50px;
+  @include secondaryDarkOnLight;
 }
 
 
@@ -94,6 +94,7 @@ $thinLightBorder: 1px solid $lighterCoolGray !important;
   width: 100%;
   text-align: center;
   font-weight: 300;
+  @include secondaryDarkOnLight;
 }
 
 
@@ -102,21 +103,21 @@ $thinLightBorder: 1px solid $lighterCoolGray !important;
 //BUTTONS
 .circle-btn{
 
-    font-family: Roboto !important;
+  font-family: Roboto !important;
   font-size: 18px;
   font-weight: 100;
   border-radius: 50%;
   height: 18px;
   width: 18px;
-padding-left: 3px;
+  padding-left: 3px;
   color: white;
   @include hv-center;
 
 }
 #new-pro-btn{
-    background: $aqua;
-    margin-left: 10px;
-    margin-top: 5px;
+  background: $aqua;
+  margin-left: 10px;
+  margin-top: 5px;
 }
 
 
@@ -125,20 +126,20 @@ padding-left: 3px;
 
 
 .default-btn {
-    width: 100%;
-    height: 50px;
-    padding: 10px;
-    border: none;
-    background: $lighterCoolGray;
-    text-align: center;
-    text-transform: uppercase;
-    @include secondaryDarkOnLight;
-    cursor: pointer;
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border: none;
+  background: $lighterCoolGray;
+  text-align: center;
+  text-transform: uppercase;
+  @include secondaryDarkOnLight;
+  cursor: pointer;
     // box-shadow: 0px 15px 10px -10px rgba(0, 0, 0, 0.3);
     transition: all 200ms ease-in-out;
-}
-.default-btn:hover {
-  background: lighten( $lighterCoolGray, 3%);
+  }
+  .default-btn:hover {
+    background: lighten( $lighterCoolGray, 3%);
   // transform: scale(1.05);
   // box-shadow: 0px 25px 15px -15px rgba(0, 0, 0, 0.3);
 }
@@ -149,7 +150,7 @@ padding-left: 3px;
 //POSITIONING 
 
 .v-spacer-20{
-    height: 20px;
+  height: 20px;
 }
 
 
@@ -162,27 +163,28 @@ padding-left: 3px;
 //NAV AND BACKGROUNDS
 
 body {
-    overflow-x: hidden;
-    margin-right: -250px;
-    font-family: Oswald !important;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    background: #F8F7F7;
+  overflow-x: hidden;
+  margin-right: -250px;
+  font-family: Oswald !important;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: #F8F7F7;
 }
 .navbar{
-    border-radius: 0 !important;
-    background: $deepGray !important;
-    position: fixed !important;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    a{
-        @include titleLightOnDark;
-    }
-    
+  border-radius: 0 !important;
+  background: $deepGray !important;
+  position: fixed !important;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  a{
+    @include titleLightOnDark;
+  }
+
 }
 .project-container{
-    max-width: 900px;
+ max-width: 1180px;
+ margin: 50px;
 }
 
 
@@ -192,45 +194,45 @@ body {
 
 //PROJECTS SELECTOR
 .project-stub{
-    padding: 15px 10px 15px 30px;
+  padding: 15px 10px 15px 30px;
 
-    background: $lightCoolGray;
-    border-bottom: 1px solid lighten( $lightCoolGray, 3%);
-    border-right: 1px solid lighten( $lightCoolGray, 3%);
-    width: 250px;
-    height: 60px;
-    @include text-3rd;
-    cursor:pointer;
+  background: $lightCoolGray;
+  border-bottom: 1px solid lighten( $lightCoolGray, 3%);
+  border-right: 1px solid lighten( $lightCoolGray, 3%);
+  width: 250px;
+  height: 60px;
+  @include text-3rd;
+  cursor:pointer;
 
 }
 .project-stub:hover{
-    background: lighten( $lightCoolGray, 3%);
+  background: lighten( $lightCoolGray, 3%);
 }
 
 .new-pro-group{
-    display: inline-flex;
+  display: inline-flex;
     // margin-left: -20px;
-}
+  }
 
 
 
 
 //PANELS
 .panel, .panel-default{
-    border: $thinLightBorder;
-    box-shadow: none !important;
+  border: $thinLightBorder;
+  box-shadow: none !important;
 }
 
 .panel-heading{
-    text-align: center;
-    border: $noBorder;
-    
+  text-align: center;
+  border: $noBorder;
+
 }
 
 .aqua-heading{
-    background: $aqua !important;
-    color: white !important;
-    @include titleLightOnDark;
+  background: $aqua !important;
+  color: white !important;
+  @include titleLightOnDark;
 }
 
 
@@ -275,122 +277,122 @@ body {
 /* SLIDER WRAPPER */
 
 #wrapper {
-    padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 #wrapper.toggled {
-    padding-left: 250px;
+  padding-left: 250px;
 }
 
 #sidebar-wrapper {
-    z-index: 1000;
-    position: fixed;
-    left: 250px;
-    width: 0;
-    top: 52px;
-    height: 100%;
-    margin-left: -250px;
-    overflow-y: auto;
-    background: $lightCoolGray2;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  top: 52px;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: $lightCoolGray2;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+  width: 250px;
 }
 
 #page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 0 15px;
+  width: 100%;
+  position: absolute;
+  padding: 0 15px;
 }
 
 #wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right: -250px;
+  position: absolute;
+  margin-right: -250px;
 }
 
 /* Sidebar Styles */
 
 .sidebar-nav {
-    position: absolute;
-    top: 0;
-    width: 250px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
+  text-indent: 20px;
+  line-height: 40px;
 }
 
 .sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #999999;
+  display: block;
+  text-decoration: none;
+  color: #999999;
 }
 
 .sidebar-nav li a:hover {
-    text-decoration: none;
-    color: #7F7F7F;
-    background: rgba(255,255,255,0.2);
+  text-decoration: none;
+  color: #7F7F7F;
+  background: rgba(255,255,255,0.2);
 }
 
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
 }
 
 .sidebar-nav > .sidebar-brand a {
-    color: #999999;
+  color: #999999;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
-    background: none;
+  color: #fff;
+  background: none;
 }
 
 @media(min-width:768px) {
-    #wrapper {
-        padding-left: 250px;
-    }
+  #wrapper {
+    padding-left: 250px;
+  }
 
-    #wrapper.toggled {
-        padding-left: 0;
-    }
+  #wrapper.toggled {
+    padding-left: 0;
+  }
 
-    #sidebar-wrapper {
-        width: 250px;
-    }
+  #sidebar-wrapper {
+    width: 250px;
+  }
 
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
-    }
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
 
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
 
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
 }
 
 

@@ -40,17 +40,18 @@ export default function projectRoutes($stateProvider, $urlRouterProvider, $locat
 			
 		}
 	});
-	 ChartJsProvider.setOptions({
-        chartColors: ['#48C1CD','#C1C9CD','#BC79CD']
-    });
-    // Configure all doughnut charts
-    ChartJsProvider.setOptions('doughnut', {
-        cutoutPercentage: 95
-    });
-    ChartJsProvider.setOptions('bubble', {
-        tooltips: { enabled: true }
-    });
 
+	// ChartJsProvider.setOptions({
+	// 	chartColors: ['#48C1CD','#C1C9CD','#BC79CD']
+	// });
+    // Configure all doughnut charts
+    // ChartJsProvider.setOptions('doughnut', {
+    // 	cutoutPercentage: 90,
+    // 	tooltips: { enabled: false }
+    // });
+    // ChartJsProvider.setOptions('bubble', {
+
+    // });
 
 
 

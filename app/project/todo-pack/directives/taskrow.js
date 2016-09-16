@@ -1,9 +1,12 @@
 import angular from 'angular';
 /* @ngInject */
-function taskrow( $interval) {
+function taskrow( $interval, $compile) {
 	return {
 		restrict: 'AE',
 		template: require('./taskrow.directive.html'),
+		// compile: function(cElement, cAttrs) {
+		// 	console.log('how many times I am called');
+		// },
 		// replace: true,
 		scope: 
 		// true,
@@ -12,13 +15,50 @@ function taskrow( $interval) {
 			// ctrl: '='
 		}
 		,
-		
-		
-		
+
+
+
 		link : function(scope, element, attrs, ctrl){
 
+			// scope.colors = ['#48C1CD','#C1C9CD','#BC79CD'];
+			// ChartJsProvider.setOptions('doughnut', {
+			// 	cutoutPercentage: 95
+			// });
+			// ChartJsProvider.setOptions({
+			// 	chartColors: ['#48C1CD','#C1C9CD','#BC79CD']
+			// });
 
-			scope.ctrl = scope.$parent.tCtrl;
+// scope.chartsProvider = ChartJsProvider;
+
+// scope.chartsProvider.setOptions('doughnut', {
+// 	cutoutPercentage: 70
+// });
+
+// scope.chartsProvider.setOptions({
+// 	chartColors: ['#66FFFF','#FF0000','#800000']
+// });
+
+
+		// 	function derp(){
+		// 	var elementResult = element[0].getElementsByClassName('dchart-container');
+
+		// 	var $chart = "<label class='chart-title'>{{swctrl.getElapsedMs() }}</label>" +
+		// 	"<canvas id='doughnut' class='chart chart-doughnut' chart-data='[100,200,300]'" +
+		// 	"chart-labels='[1]'></canvas>"
+
+
+		// 	var compiledChart = $compile($chart)(scope);
+
+
+		// 	element.after(compiledChart);
+
+
+		// }
+
+		// derp();
+
+
+		scope.ctrl = scope.$parent.tCtrl;
 
 			//PASS THE PARENT CONTROLLER TO THE DIRECTIVE
 			scope.task = function() {
@@ -26,7 +66,19 @@ function taskrow( $interval) {
 				return scope.t;
 			};
 
-			
+
+			scope.chartcolors =  ['#F3848E','#F3F5F6'];
+			scope.chartoptions = {cutoutPercentage: 82, tooltips: { enabled: false }};
+			scope.chartlabels = ['Hours', 'Relative Average'];
+
+			var hoursAsMs = moment.duration(scope.task().hours).asMilliseconds();
+			var totalAsMs = scope.ctrl.gms;
+			var average = totalAsMs / scope.ctrl.todos.length;
+
+			scope.chartdata = [ hoursAsMs, average];
+
+			// console.log("****************: " + [ moment.duration(scope.task.hours), moment.duration(scope.ctrl.gms)]);
+			console.log("****************: " + [ moment.duration(scope.task().hours).asMilliseconds(), scope.ctrl.gms]);
 
 			if(scope.t.recording == true){
 				scope.swctrl.start();
@@ -102,6 +154,12 @@ function taskrow( $interval) {
 		controllerAs: 'swctrl',
 
 		controller: function($scope) {
+
+
+
+
+
+
 			console.log("Creating the directive's controller");
 			var self = this;
 			var totalElapsedMs = 0 ;
@@ -120,6 +178,8 @@ function taskrow( $interval) {
 
 
 			};
+
+
 
 			var count = 0;
 			var d = 0;
@@ -143,7 +203,7 @@ function taskrow( $interval) {
 						console.log("startTime: " + startTime);
 						timerPromise = $interval(function() {
 							var now = new Date();
-						
+
 
 
 
@@ -197,13 +257,25 @@ function taskrow( $interval) {
 				return time;
 			};
 
+
+			
+
+			var tet;
+			var tetMoment;
+
 			self.getElapsedMs = function() {
-				var tet =  totalElapsedMs + elapsedMs;
-				var tetMoment = moment.duration(tet);
+				tet =  totalElapsedMs + elapsedMs;
+				tetMoment = moment.duration(tet);
 				var hms = Math.floor(tetMoment.asHours()) + moment.utc(tet).format(":mm:ss");
 				
 				return  hms;
 			};
+
+			self.getMs = function(){
+
+				return tetMoment;
+			}
+
 
 
 		}
@@ -212,7 +284,7 @@ function taskrow( $interval) {
 };
 
 
-
+/* @ngInject */
 export default angular.module('directives.taskrow', [])
 .directive('taskrow', taskrow)
 .filter('secondsToDateTime', [function() {
@@ -222,4 +294,4 @@ export default angular.module('directives.taskrow', [])
 }])
 .name;
 
-taskrow.$inject = ['$interval']
+taskrow.$inject = ['$interval', '$compile']

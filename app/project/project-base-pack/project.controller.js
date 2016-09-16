@@ -59,7 +59,67 @@ export default function projectCtrl($scope, todoService, authService, $rootScope
 	};
 
 
+
+
+
 	pCtrl.loadData();
+
+
+
+
+
+// 		function tallyUp(){
+
+
+// 		var ms = 0;
+// 		var totalMs = moment.duration(0, 'ms');
+// 		function addThenConvert(callback){
+
+// 			_.forEach(pCtrl.todos, function(value, key) {
+// 				ms = moment.duration(value.hours).asMilliseconds();
+// 				console.log("value hours as ms: " + ms);
+// 				totalMs = moment.duration(totalMs).add(ms, 'milliseconds');
+// 				console.log(totalMs);
+// 			});
+
+// 			callback(totalMs);
+// 		}
+
+// 		var convert = function(totes){
+// 			console.log(totes);
+// 			var d = moment.duration(totes);
+// 			tCtrl.totalMs = d;
+// 			var x = Math.floor(d.asHours()) 
+// 			console.log(x);
+
+// 			var z = moment.utc(d.asMilliseconds()).format(':mm:ss')
+// 			tCtrl.gms = d.asMilliseconds();
+// 			console.log("total duration: " + x + z);
+// 		// tCtrl.totalHours = x + z;
+// 		tCtrl.totalHours = x;
+// 	}
+
+// 	addThenConvert(convert);
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	function clearNewForm(){
