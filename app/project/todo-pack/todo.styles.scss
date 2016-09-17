@@ -1,48 +1,183 @@
 @import '../../common/common.styles';
 
-.title {
-	color: deepskyblue;
-	font-size: 30px;
-	font-weight: 600;
+
+
+.fade-up{
+	position: absolute;
+	bottom: 21px;
+	height: 150px;
+	left: 18px;
+	right: 18px;
+	pointer-events: none;
+	// box-shadow: 0 -29px 68px 89px rgba(255, 255, 255, 0.83);
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), white) repeat scroll 0 0;
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white) repeat scroll 0 0;
+
 }
 
-.num-wrapper {
-	padding: 5px 8px;
-	background: #888888;
-	color: aliceblue;
-	margin-top: -5px !important;
+.fade-down{
+	position: absolute;
+	height: 35px;
+	left: 18px;
+	right: 18px;
+	margin-top: -3px;
+	z-index: 100;
+	pointer-events: none;
+	// box-shadow: 0 -29px 68px 89px rgba(255, 255, 255, 0.83);
+	background: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0), white) repeat scroll 0 0;
+	background: linear-gradient(to top, rgba(255, 255, 255, 0), white) repeat scroll 0 0;
+
 }
 
-.strike {
-	color: grey;
-	text-decoration: line-through;
+.last-task{
+	width: 100%;
+	height: 70px;
 }
 
-.chillin {
-	background: #40dbc9;
+
+
+.new-task-container{
+	height: 0px;
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+	overflow: hidden;
+
+}
+.expandiv2{
+	opacity: 0;
+	background: $lightCoolGray2;
+	margin: 10px 25px;
+	height: 100%;
+	padding: 10px;
+	overflow: hidden;
+	box-shadow: 0 2px 8px 0px rgba(0, 0, 0, 0.03);
+	border-bottom: 1px solid #EFEFEF;
 }
 
-.warning {
-	background: #ff9553;
+.new-task-container.expand2{
+	height: 320px;
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
 }
 
-.danger {
-	background: #db3030;
+
+.new-task-container.contract2{
+	height: 0px;
+	overflow: hidden;
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
 }
 
-.red-text {
-	color: red;
+.expandiv2.fadeout2{
+	opacity: 0;
 }
 
-.ace_editor {
-	height: 200px;
-	padding: 20px;
-	width: 500px;
-	margin-left: 60px;
+.expandiv2.fadein2{
+	opacity: 1;
 }
 
-.editor {}
 
-.editFormWrapper {
-	height: 500px;
+.task-panel-body{
+	height: 956px;
+	margin-right: -16px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	margin-top: -3px;
+	padding-top: 0 !important;
+	
+
+}
+.task-panel{
+	overflow: hidden !important;
+	height: 650px !important;
+}
+
+
+
+.scrollme{
+	margin-right: -16px;
+	overflow-y: scroll;
+	overflow-x: hidden
+}
+
+.all-todos{
+	height: 0px;
+	opacity: 0;
+	transition: 0.5s ease-in-out all 0.3s;
+	
+}
+
+.all-todos.fadein{
+	height: 100%;
+	opacity: 1;
+
+}
+
+
+
+.new-minimal-input{
+	@include btm-border;
+	height: 50px;
+	@include secondaryDarkOnLight;
+	margin-bottom: 10px;
+}
+
+
+.task-panel-header{
+	@include btm-border;
+	background: $lightCoolGray2;
+	margin: 1px;
+	padding: 10px;
+}
+
+
+.header-numbers{
+	margin-top: 12px;
+}
+
+.styled-select select {
+	margin-top: 15px;
+	width: 110%;
+	background: white;
+	padding: 5px;
+	line-height: 1;
+	border: 0;
+	border-radius: 0;
+	height: 50px;
+	-webkit-appearance: none;
+	appearance: none;
+	border: none;
+	outline: none;
+}
+
+.styled-select {
+	width: 90%;
+	height: 50px;
+	overflow: hidden;
+	border: none;
+}
+
+textarea {
+	resize: none;
+}
+
+.h-spacer{
+	width: 10px;
+
+
+}
+
+.cat-select{
+	border: $thinLightBorder;
+	transition: 0.5s ease-in-out all 0.3s;
+
+}
+
+.cat-select li{
+	cursor: pointer;
+	padding: 5px;
+	@include secondaryDarkOnLight;
+
+}
+
+.cat-select li:hover{
+	background: darken(white, 2%);
+	
 }

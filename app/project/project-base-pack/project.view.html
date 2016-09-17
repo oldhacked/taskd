@@ -2,7 +2,7 @@
 
 
 <nav class="navbar">
-  <div class="container-fluid">
+  <div class="">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -43,7 +43,7 @@
        <span class="new-pro-group"> New Project <span id="new-pro-btn" class="circle-btn">+</span></span>
      </div>
 
-     <div class="project-stub" ng-repeat="project in pCtrl.projects" ui-sref="base.projects.dashboard({proj:project._id})">
+     <div class="project-stub " active="onOrOff" ng-repeat="project in pCtrl.projects" ui-sref="base.projects.dashboard({proj:project._id})" >
 
 
        <span class="text-2nd"> {{project.title}}</span>

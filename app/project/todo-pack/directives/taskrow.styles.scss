@@ -1,0 +1,359 @@
+@import '../../common/common.styles';
+
+
+
+
+.task-stub{
+	height: 50px;
+
+}
+
+
+
+.task-title{
+	height: 26px;
+}
+
+.task-category{
+	height: 20px;
+
+}
+
+
+
+
+.opt-group{
+	width: 300px;
+
+
+	@include hv-center;
+}
+
+
+
+
+
+
+/*CHECK BOX*/
+.check{
+	margin: 0px 10px 0px 10px;
+	cursor: pointer;
+	height: 20px;
+	width: 20px;
+	border: solid 2px $mediumCoolGray;
+	background: white;
+	transition: all 200ms cubic-bezier(0.25, 0.39, 0.39, 2.01);
+}
+
+
+.check:hover{
+	transform: scale(1.2);
+}
+
+.notchckd {
+	background: white;
+}
+
+
+
+.chckd{
+	background: $aqua;
+	border: $aqua;
+}
+
+
+
+/*RECORD BTN*/
+
+.rec-btn{
+	margin: 0px 10px 0px 10px;
+	transition: all 200ms cubic-bezier(0.25, 0.39, 0.39, 2.01);
+	border-radius: 50%;
+	height: 22px;
+	width: 22px;
+	cursor: pointer;
+}
+.rec-btn:hover{
+	transform: scale(1.2);
+}
+
+
+.recno{
+	background: $mediumCoolGray;
+}
+
+.rec{
+	background: $pinkRed;
+}
+
+
+
+
+/*EXPANDER*/
+
+
+.exp-btn-cnt{
+	transform: rotate(45deg);
+}
+
+.exp-btn-cnt.expanded{
+	transform-origin: center center;
+	transform: rotate(45deg);
+}
+.exp-btn{
+	margin: 0px 10px 0px 10px;
+	transition: all 200ms cubic-bezier(0.25, 0.39, 0.39, 2.01);
+	height: 22px;
+	width: 22px;
+	font-size: 24px;
+	cursor: pointer;
+}
+.exp-btn:hover{
+	transform: scale(1.2);
+}
+
+.expanded{
+	color: darken($mediumCoolGray, 3%);
+	transform-origin: center center;
+	transform: rotate(45deg);
+	
+}
+
+.contracted{
+	color: $mediumCoolGray;
+}
+
+
+
+
+
+
+
+
+
+
+
+.onetime-fadein.ng-enter.ng-enter-active{
+	animation: fadein 0.3s ease-in-out forwards;
+}
+
+
+.task{
+	height: 100%;
+	@include btm-border;
+	padding: 20px 0px;
+}
+
+.task.ng-enter {
+
+
+	animation: expandin 0.3s ease-in-out forwards;
+
+
+	.inner-task{
+		animation: fadein 0.3s ease-in-out forwards;
+	}
+}
+
+.task.ng-enter.ng-enter-active {
+	animation: expandin 0.3s ease-in-out forwards;
+	.inner-task{
+		opacity: 1;
+	}
+}
+
+
+
+.task.ng-leave {
+
+	animation: contractout 0.2s ease-in-out forwards 0.2s;
+	.inner-task{
+		animation: fadeout 0.2s ease-in-out forwards;
+	}
+}
+
+.task.ng-leave.ng-leave-active {
+	animation: contractout 0.2s ease-out forwards 0.2s;
+
+	.inner-task{
+		animation: fadeout 0.2s ease-out forwards;
+	}
+}
+
+
+
+.more-task-info{
+	overflow: hidden;
+	height: 0px;
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+
+}
+.expandiv{
+	opacity: 0;
+}
+
+.more-task-info.expand{
+	height: 160px;
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+}
+
+
+.more-task-info.contract{
+	height: 0px;
+	overflow: hidden;
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+}
+
+.expandiv.fadeout{
+	opacity: 0;
+}
+
+.expandiv.fadein{
+	opacity: 1;
+}
+
+
+
+.notes{
+	margin-top: 10px;
+	height: 90px;
+	overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+.inner-task-wrapper{
+	overflow: hidden;
+	height: 55px;
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+}
+
+
+
+
+.expandouter{
+	height: 210px;
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+
+
+}
+
+.expandmore{
+	height: 310px;
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+
+
+}
+
+
+.expandless{
+	height: 210px;
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+
+
+}
+.contractouter{
+	height: 55px;
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+}
+
+
+
+
+
+
+
+.inner-task{
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+}
+
+
+
+.inner-task.slideup{
+	transform: translateY(-230px);
+}
+
+
+.edit-task-container{
+	margin-top: 40px;
+}
+
+
+
+
+@keyframes fadeout{
+
+	0%{
+		display: block;
+		opacity: 1;
+	}
+	99%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 0;
+		display: none;
+	}
+}
+
+
+
+@keyframes fadein{
+	0%{
+		display: none;
+		opacity: 0;
+	}
+	10%{
+		display: block;
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+
+@keyframes expandin{
+	0%{
+		height: 0px;
+	}
+	10%{
+		height: 20%;
+	}
+	100%{
+		height: 100%;
+	}
+}
+
+@keyframes contractout{
+	0%{
+		height: 100%;
+	}
+	
+
+	100%{
+		height: 0px;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

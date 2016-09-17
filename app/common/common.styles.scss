@@ -2,9 +2,39 @@ $green : #67E5C5;
 $red: #E5371D;
 
 
+$deepGray: #70777C;
+$lighterCoolGray: #EDF1F3;
+$lightCoolGray: #F5F8F9;
+$lightCoolGray2: #F7F9F9;
+$mediumCoolGray: #D1D2D3;
+
+
+
+$info-3rd: #898B8E;
+$info-3rd-lighter: lighten($info-3rd, 10%);
+$offWhite1: #F7F5F3;
+
+//MAIN COLORS
+$aqua: #85C1BD;
+$pinkRed: #F3848E;
+//TEXT MIXINS
+$primaryFontSize: 24px !important;
+$secondaryFontSize: 18px !important;
+$tertiaryFontSize: 14px !important;
+
+$panelGray: #DDE1E2;
+//POSITIONING MIXINS
+@mixin hv-center {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+
+
 [ui-view].ng-enter, [ui-view].ng-leave {
 	/*opacity: 1;*/
-/*    position: absolute;*/
+    /*    position: absolute;*/
     -webkit-transition:all .5s ease-in-out;
     transition:all .5s ease-in-out;
 }
@@ -17,16 +47,104 @@ $red: #E5371D;
 [ui-view].ng-enter-active {
     opacity: 1;
     display: block;
-     z-index: 100;
+    z-index: 100;
 }
 
 [ui-view].ng-leave {
     opacity: 1;
-     z-index: 0;
-     display: none;
+    z-index: 0;
+    display: none;
 }
 
 [ui-view].ng-leave-active {
     opacity: 0;
-     z-index: 0;
+    z-index: 0;
 }
+
+
+
+.panel{
+    min-width: 500px !important;
+}
+
+
+
+//BORDER MIXINS
+$noBorder: 0px solid transparent !important;
+$thinLightBorder: 1px solid $lighterCoolGray !important; 
+
+@mixin btm-border{
+  border-top: $noBorder;
+  border-right: $noBorder;
+  border-left: $noBorder;
+  border-bottom: $thinLightBorder;
+}
+
+
+@mixin text-3rd {
+  color: $info-3rd;
+  font-size: 18px;
+  font-weight: 300;
+}
+@mixin titleLightOnDark {
+  color: $offWhite1 !important;
+  font-size: $primaryFontSize;
+  font-weight: 500 !important;
+}
+
+@mixin titleDarkOnLight {
+   color: $deepGray !important;
+   font-size: $primaryFontSize;
+   font-weight: 500 !important;
+}
+
+
+@mixin secondaryLightOnDark{
+  color: $offWhite1 !important;
+  font-size: $secondaryFontSize;
+  font-weight: 300 !important;
+}
+
+@mixin secondaryDarkOnLight{
+  color: $info-3rd !important;
+  font-size: $secondaryFontSize;
+  font-weight: 300 !important;
+}
+
+@mixin tertiaryDarkOnLight{
+  color: $info-3rd !important;
+  font-size: $tertiaryFontSize;
+  font-weight: 300 !important;
+}
+
+
+.tertiary-text{
+  @include tertiaryDarkOnLight;
+}
+.secondary-text{
+  @include secondaryDarkOnLight;
+}
+
+.secondary-darker{
+    color: $deepGray !important;
+    font-size: $secondaryFontSize;
+    font-weight: 300;
+}
+
+
+.tertiary-lighter{
+  color: $info-3rd-lighter !important;
+  font-size: $tertiaryFontSize;
+  font-weight: 300 !important;
+}
+
+.advisory{
+    color: $pinkRed;
+    font-size: 14px;
+    height: 16px;
+    margin-bottom: 2px;
+}
+
+
+
+

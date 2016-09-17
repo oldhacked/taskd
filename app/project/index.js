@@ -4,6 +4,7 @@
 //APP
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
+import ngAnimate from 'angular-animate';
 //STYLES
 require('./project-base-pack/project.styles.scss');
 
@@ -25,8 +26,9 @@ import showComp from './todo-pack/todo.filter.js';
 
 
 
+
 	
-export default angular.module('app.project', [uirouter, projectService, 'chart.js'])
+export default angular.module('app.project', [uirouter, projectService, 'chart.js', 'ngAnimate'])
 // .run(projectRoot)
 
 .config(projectRoutes)

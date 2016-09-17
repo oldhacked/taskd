@@ -1,7 +1,20 @@
+
 import angular from 'angular';
+require('./taskrow.styles.scss');
+
 /* @ngInject */
-function taskrow( $interval, $compile) {
+function taskrow( $interval, $compile, $animate) {
+	
 	return {
+
+		
+
+
+
+
+
+
+
 		restrict: 'AE',
 		template: require('./taskrow.directive.html'),
 		// compile: function(cElement, cAttrs) {
@@ -20,47 +33,44 @@ function taskrow( $interval, $compile) {
 
 		link : function(scope, element, attrs, ctrl){
 
-			// scope.colors = ['#48C1CD','#C1C9CD','#BC79CD'];
-			// ChartJsProvider.setOptions('doughnut', {
-			// 	cutoutPercentage: 95
-			// });
-			// ChartJsProvider.setOptions({
-			// 	chartColors: ['#48C1CD','#C1C9CD','#BC79CD']
-			// });
 
-// scope.chartsProvider = ChartJsProvider;
+		//STYLES
+		scope.exp = false;
 
-// scope.chartsProvider.setOptions('doughnut', {
-// 	cutoutPercentage: 70
-// });
+	
 
-// scope.chartsProvider.setOptions({
-// 	chartColors: ['#66FFFF','#FF0000','#800000']
-// });
+		scope.editslide = false;
 
+		scope.taskedit = {};
+		scope.edit = function(task){
+			scope.taskedit = angular.copy(task);
+		}
 
-		// 	function derp(){
-		// 	var elementResult = element[0].getElementsByClassName('dchart-container');
+		// [editslide ? 'expandmore' : 'expandless, 'exp ? 'expandouter' : 'contractouter']
 
-		// 	var $chart = "<label class='chart-title'>{{swctrl.getElapsedMs() }}</label>" +
-		// 	"<canvas id='doughnut' class='chart chart-doughnut' chart-data='[100,200,300]'" +
-		// 	"chart-labels='[1]'></canvas>"
+		scope.wrapper = function(){
+			
 
+			if (scope.exp != true){
+				scope.innertaskwrap = "contractouter";
+			}
+			if (scope.exp == true){
+				scope.innertaskwrap = "expandouter";
+			}
+			if(scope.editslide != false){
+				scope.innertaskwrap = "expandmore";
+			}
+			if(scope.editslide == false && scope.exp == true){
+				scope.innertaskwrap = "expandless";
+			}
 
-		// 	var compiledChart = $compile($chart)(scope);
-
-
-		// 	element.after(compiledChart);
-
-
-		// }
-
-		// derp();
-
+		};
 
 		scope.ctrl = scope.$parent.tCtrl;
 
 			//PASS THE PARENT CONTROLLER TO THE DIRECTIVE
+
+
 			scope.task = function() {
 
 				return scope.t;
@@ -71,6 +81,8 @@ function taskrow( $interval, $compile) {
 			scope.chartoptions = {cutoutPercentage: 82, tooltips: { enabled: false }};
 			scope.chartlabels = ['Hours', 'Relative Average'];
 
+
+
 			var hoursAsMs = moment.duration(scope.task().hours).asMilliseconds();
 			var totalAsMs = scope.ctrl.gms;
 			var average = totalAsMs / scope.ctrl.todos.length;
@@ -78,7 +90,7 @@ function taskrow( $interval, $compile) {
 			scope.chartdata = [ hoursAsMs, average];
 
 			// console.log("****************: " + [ moment.duration(scope.task.hours), moment.duration(scope.ctrl.gms)]);
-			console.log("****************: " + [ moment.duration(scope.task().hours).asMilliseconds(), scope.ctrl.gms]);
+			// console.log("****************: " + [ moment.duration(scope.task().hours).asMilliseconds(), scope.ctrl.gms]);
 
 			if(scope.t.recording == true){
 				scope.swctrl.start();
@@ -97,7 +109,7 @@ function taskrow( $interval, $compile) {
 				var d = moment.duration(ms);
 				var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
 
-				console.log(s);
+				// console.log(s);
 
 				scope.swctrl.setTotalElapsed(scope.task().hours, s);
 
@@ -160,7 +172,7 @@ function taskrow( $interval, $compile) {
 
 
 
-			console.log("Creating the directive's controller");
+			// console.log("Creating the directive's controller");
 			var self = this;
 			var totalElapsedMs = 0 ;
 			var elapsedMs = 0;
@@ -234,7 +246,7 @@ function taskrow( $interval, $compile) {
 					recording = true;
 
 				} else if(recording === true){
-					console.log("stop time");
+					// console.log("stop time");
 					self.stop();
 					recording = false;
 				}
@@ -294,4 +306,4 @@ export default angular.module('directives.taskrow', [])
 }])
 .name;
 
-taskrow.$inject = ['$interval', '$compile']
+taskrow.$inject = ['$interval', '$compile', '$animate']
