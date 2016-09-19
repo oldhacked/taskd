@@ -21,6 +21,12 @@
   @include secondaryDarkOnLight;
 }
 
+
+.minimal-input2{
+  @include btm-border;
+  @include secondaryDarkOnLight;
+}
+
 .task-input{
   border: none;
   width: 100%;
@@ -63,6 +69,28 @@
   font-size: $tertiaryFontSize;
   font-weight: 300 !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //BUTTONS
@@ -109,6 +137,35 @@
   // transform: scale(1.05);
   // box-shadow: 0px 25px 15px -15px rgba(0, 0, 0, 0.3);
 }
+
+
+.minimal-btn {
+  margin: 0 !important;
+  width: 66px;
+  position: absolute;
+  top: 0;
+  right: 54px;
+  height: 40px;
+  padding: 10px;
+  border: $thinLightBorder;
+
+  text-align: center;
+  text-transform: uppercase;
+    color: $info-3rd !important;
+  font-size: $tertiaryFontSize;
+  font-weight: 100 !important;
+  cursor: pointer;
+
+
+  transition: all 200ms ease-in-out;
+}
+
+.minimal-btn:hover {
+  background: lighten( $lighterCoolGray, 3%);
+
+}
+
+
 
 
 
@@ -291,6 +348,9 @@ body {
 }
 
 /* Sidebar Styles */
+.navbar{
+  z-index: 300;
+}
 
 .sidebar-nav {
   position: absolute;

@@ -1,9 +1,9 @@
  <div class="inner-task-wrapper" ng-class="innertaskwrap">
- <div class="inner-task ng-cloak" ng-class="[editslide ? 'slideup' : 'slidedown' ]">
+ 	<div class="inner-task ng-cloak" ng-class="[editslide ? 'slideup' : 'slidedown' ]">
 
 
  		<div class="row task-stub">
- 	
+
 
  			<input type="hidden" ng-model="task()._id"/>
  			<div class="col-xs-6">
@@ -18,26 +18,26 @@
 	<td><button class='btn btn-default' type='button' ng-click='ctrl.destroy(task())'>Delete</button></td> -->
 	<div class="col-xs-2">
 		<!-- <input type="hidden" placeholder="Hours" ng-model="task().hours"/> -->
-		<span class="secondary-text" ng-hide="exp">{{swctrl.getElapsedMs()}}</span>
+		<span class="secondary-text" >{{swctrl.getElapsedMs()}}</span>
 	</div>
 
 	<div class="col-xs-4 opt-group">
 
 
-			<button class="check" ng-model="task().completed" ng-click="task().completed = !task().completed" ng-class="[task().completed ? 'chckd' : 'notchckd']" ng-change='ctrl.updatestat(task())'> </button>
+		<button class="check" ng-model="task().completed" ng-click="task().completed = !task().completed" ng-class="[task().completed ? 'chckd' : 'notchckd']" ng-change='ctrl.updatestat(task())'> </button>
 
 
-	
-
-			<div  class="rec-btn" ng-dblclick="swctrl.reset()" ng-class="[task().recording ? 'rec' : 'recno']" ng-click='swctrl.start(); ctrl.toggleRec(task() , swctrl.getElapsedMs())'></div>
 
 
-	
+		<div  class="rec-btn" ng-dblclick="swctrl.reset()" ng-class="[task().recording ? 'rec' : 'recno']" ng-click='swctrl.start(); ctrl.toggleRec(task() , swctrl.getElapsedMs())'></div>
 
 
-			<div class="exp-btn-cnt"> <span class="glyphicon glyphicon-move exp-btn" ng-class="[exp ? 'expanded' : 'contracted']" aria-hidden="true" ng-click="exp = !exp; wrapper()"></span> </div>
-	
-		</div>
+
+
+
+		<div class="exp-btn-cnt"> <span class="glyphicon glyphicon-move exp-btn" ng-class="[exp ? 'expanded' : 'contracted']" aria-hidden="true" ng-click="exp = !exp; wrapper()"></span> </div>
+
+	</div>
 	
 
 </div>
@@ -45,16 +45,19 @@
 
 <div class=" row more-task-info" ng-class="[exp ? 'expand' : 'contract']" ng-hide="!exp">
 	<div class="">
-	<div ng-class="[exp ? 'fadein' : 'fadeout']" class="expandiv row">
-		<div class="v-spacer"></div>
+		<div ng-class="[exp ? 'fadein' : 'fadeout']" class="expandiv row">
+			<div class="v-spacer"></div>
 
-		<div class="col-xs-7 tertiary-text">
-		
-			<div class="col-xs-12 notes">
-			{{task().notes}}
-		</div>
-			<div class="col-xs-12 notes">
-				<div class="default-btn col-xs-6" ng-click="editslide = !editslide; wrapper(); edit(task())">Edit</div>
+
+
+
+			<div class="col-xs-12 notes-container">
+				<div class="col-xs-12 notes tertiary-text">
+					{{task().notes}}
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="default-btn col-xs-4" ng-click="editslide = !editslide; wrapper(); edit(task())">Edit</div>
 			</div>
 
 
@@ -76,22 +79,25 @@
 					Save
 				</button>
 			</div> -->
+
+
+
+
+
+
+	<!-- 	<div class="col-xs-5">
+			<div class="dchart-container">
+				<label class="small-chart-title">{{swctrl.getElapsedMs() }}</label>
+				<canvas chart-colors="chartcolors" chart-options="chartoptions" class="chart chart-doughnut" chart-data="chartdata"
+				chart-labels="chartlabels"></canvas>
+
+				<canvas class="chart chart-doughnut" colours="colours" options="options" data="data" labels="labels"></canvas>
+
+
+
+			</div>
 		</div>
-
-
-
-
-		<div class="col-xs-5">
-	  <div class="dchart-container">
-	      <label class="small-chart-title">{{swctrl.getElapsedMs() }}</label>
-	      <canvas chart-colors="chartcolors" chart-options="chartoptions" class="chart chart-doughnut" chart-data="chartdata"
-	      chart-labels="chartlabels"></canvas>
-	    </div>
-		</div>
-
-
-		<span class="advisory">{{tCtrl.editTaskAdvisory}}</span>
-		<!-- end inside task -->
+	-->
 
 
 
@@ -103,9 +109,13 @@
 
 
 
-	</div>
-	<!-- end expand div -->
-	</div>
+
+
+
+
+</div>
+<!-- end expand div -->
+</div>
 </div>
 <!-- end more task info row -->
 
@@ -121,24 +131,28 @@
 
 
 
-      <div class="col-xs-12">
-
-
- 
-        <div class="col-xs-12 text-center">
-         <span class="secondary-text" > EDIT TASK</span> 
-         <br>
-         <div class="advisory">{{tCtrl.newTaskAdvisory}}</div>
-       </div>
-       <br>
+	<div class="col-xs-12">
 
 
 
+		<div class="col-xs-12 text-center">
+			<span class="secondary-text" > EDIT TASK</span> 
+			<br>
+			<!-- <span class="advisory">{{tCtrl.editTaskAdvisory}}</span> -->
+			<div class="advisory">{{tCtrl.newTaskAdvisory}}</div>
+		</div>
+		<br>
 
 
 
 
-       <input class="new-minimal-input col-xs-12" type="text" placeholder="Task Title" ng-model="taskedit.task"/>
+
+
+
+		<input class="new-minimal-input col-xs-6" type="text" placeholder="Task Title" ng-model="taskedit.task"/>
+		<input class="new-minimal-input col-xs-2" type="number" placeholder="hours" ng-model="taskedit.hr" />
+		<input class="new-minimal-input col-xs-2" type="number" placeholder="min" ng-model="taskedit.min" />
+		<input class="new-minimal-input col-xs-2" type="number" placeholder="sec" ng-model="taskedit.sec" />
        <!--  <input class="minimal-input" type="text" placeholder="Hours" ng-model="tCtrl.newTodoHours"/>
        <input class="minimal-input" type="text" placeholder="Minuts" ng-model="tCtrl.newTodoMin"/> -->
 
@@ -150,34 +164,49 @@
 
        <input class="new-minimal-input col-xs-6" type="text" placeholder="New Category" ng-model="taskedit.category" />
 
-       <div class="dropdown col-xs-6">
-        <div class="default-btn"  class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Category
-          <span class="caret"></span>
-        </div>
-        <ul class="dropdown-menu cat-select col-xs-12" aria-labelledby="dropdownMenu1">
-         <li ng-repeat="cat in ctrl.categories" ng-click="taskedit.category = cat" >{{cat}}</li>
-       </ul>
-     </div>
 
-     <textarea class="col-xs-12 new-minimal-input" placeholder="Notes" ng-model="taskedit.notes"></textarea>
+       <div class="col-xs-6">
+       	<div class="default-btn" ng-click="catClicked = !catClicked">
+       		Category
+
+       	</div>
+       </div>
+
+
+
+       <textarea class="col-xs-12 new-minimal-input" placeholder="Notes" ng-model="taskedit.notes"></textarea>
    </div>
    <div class="col-xs-4">
-     <button class="col-xs-12 default-btn marg-right" type="button" ng-click=" editslide = ! editslide; wrapper()">Cancel</button>
+   	<button class="col-xs-12 default-btn marg-right" type="button" ng-click=" editslide = ! editslide; wrapper()">Cancel</button>
    </div>
 
    <div class="h-spacer"></div>
-    <div class="col-xs-4">
-     <button class="col-xs-12 default-btn marg-right" type="button" ng-click="ctrl.destroy(task())">Delete</button>
-   </div>
-      <div class="h-spacer"></div>
    <div class="col-xs-4">
-     <button class=" col-xs-12 default-btn marg-left " ng-click=" editslide = ! editslide; ctrl.save(taskedit)">Save</button>
+   	<button class="col-xs-12 default-btn marg-right" type="button" ng-click="ctrl.destroy(task())">Delete</button>
+   </div>
+   <div class="h-spacer"></div>
+   <div class="col-xs-4">
+   	<button class=" col-xs-12 default-btn marg-left " ng-click=" editslide = !editslide; ctrl.save(taskedit); wrapper(); updateTime();">Save</button>
    </div>
 
 
 
+   <div class="select-cat-modal" ng-class="[catClicked ? 's' : 'h']">
+   	<div class="col-xs-12">
+   	<div class="exit" ng-click="catClicked = !catClicked"> x </div>
+   </div>
 
+
+   	<div class="all-cats">
+
+   		<ul >
+   			<li ng-repeat="cat in ctrl.categories track by $index" ng-click="catSel(cat)">{{cat}}</li>
+   		</ul>
+
+   	</div>
+
+
+   </div>
 
 </div>
 <!-- end edit task container -->

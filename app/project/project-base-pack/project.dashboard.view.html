@@ -1,86 +1,196 @@
 <!-- PROJECT PANEL -->
 <div class="col-xs-12 col-md-6">
   <div class="panel panel-default ">
-    <div class="panel-heading aqua-heading">{{tCtrl.project.title}} </div>
+    <div class="panel-heading aqua-heading">PROJECT
+        <div class="btn " ng-click="tCtrl.tog(); tCtrl.copyProj()">Edit</div>
+    </div>
     <!-- <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> -->
-    <div class="panel-body">
+    <!-- <div class="minimal-btn " ng-click="tCtrl.tog(); tCtrl.copyProj()">Edit</div> -->
+
+    <div class="panel-body project-panel-body">
 
 
-      <form ng-submit="pCtrl.createNewProj(pCtrl.newProjTitle, pCtrl.newProjClient, pCtrl.newProjDueDate, pCtrl.newProjRate )" class="form-group">
 
-        <div class="col-xs-12">
+      <div class="project-info" id="tog">
+        <div class="belt">
+          <div class="state state-1">
+
+             <div class="col-xs-12 ">
+   
 
 
-          <input placeholder="Title" class="minimal-input col-xs-12" type="text" ng-model="tCtrl.project.title"/>
+            <div class="col-xs-12 project-info-row">
+              <span class="secondary-darker">Title: </span> <span class="secondary-text"> {{tCtrl.project.title}}</span>
+              
+          <!--     <div class="btn" ng-click="tCtrl.tog(); tCtrl.copyProj()">Edit</div> -->
+            </div>
+            <div class="col-xs-12 project-info-row">
+              <span class="secondary-darker">Client: </span> <span class="secondary-text"> {{tCtrl.project.client}}</span>
+            </div>
 
-          <input placeholder="Client" class="minimal-input col-xs-12" type="text" ng-model="tCtrl.project.client"/>
 
+
+
+            <div class="col-xs-12 project-info-row">
+             <span class="secondary-darker">Due Date: </span> <span class="secondary-text"> {{tCtrl.project.dueDateFormatted}}</span>
+           </div>
+
+           <div class="col-xs-12 project-info-row">
+            <span class="secondary-darker">Rate: </span> <span class="secondary-text"> {{tCtrl.project.rate}}</span>
+          </div>
+
+
+
+
+
+          </div>
+
+      </div>
+      <!-- end state 1 -->
+
+
+
+
+
+
+      <div class="state state-2">
+
+
+
+
+
+
+
+
+
+ <div class="col-xs-12 ">
+
+
+
+
+          <div class="col-xs-12 ">
+          <input type="text" placeholder="Project Title" ng-model="tCtrl.editProj.title"/>
+        </div>
+
+        <div class="col-xs-12 project-info-row">
+          <input  type="text" placeholder="Client" ng-model="tCtrl.editProj.client"/>
+        </div>
+
+
+
+
+
+
+
+        <div class="col-xs-12 ">
+          <input  type="text" placeholder="Due Date" ng-model="tCtrl.editProj.dueDate"/>
 
         </div>
 
 
-        <div class="col-xs-12">
 
-
-          <input placeholder="Due Date" class="minimal-input col-xs-6" type="text" ng-model="tCtrl.project.dueDateFormatted"/>
-
-
-          <input placeholder="Rate" class="minimal-input col-xs-6" type="text" ng-model="tCtrl.project.rate"/>
-
-
-
+        <div class="col-xs-12 ">
+          <input type="text" placeholder="Rate" ng-model="tCtrl.editProj.rate"/>
         </div>
 
-        <div class="col-xs-12" ng-if="!tCtrl.editingProj">
+
+       
 
 
 
-          <div class="v-spacer-20"></div>
-
-          <div class="row">
-            <button class="default-btn" type="submit">Create Project</button>
-
-          </div>
-          <div class="v-spacer-20"></div>
-
-          <div class="row">
-            <button class="default-btn">Cancel</button>
-          </div>
-
-
-        </div> 
 
 
 
-      </form>
+
+
+
+
+
+
+
+          <div class="col-xs-12">
+        <div class="col-xs-4">
+          <button class="default-btn " type="button" ng-click="tCtrl.tog()">Cancel</button>
+        </div>
+
+   
+
+
+        <div class="col-xs-4">
+          <button class="default-btn " type="button" ng-click="tCtrl.delProjTog()">Delete</button>
+        </div>
+
+ 
+
+
+        <div class="col-xs-4">
+          <button class=" default-btn  " ng-click="tCtrl.updateProj(tCtrl.editProj)">Save</button>
+        </div>
+
+    
+
+
+
+
+   <!--    <div class="del-proj-modal" ng-class="tCtrl.projModal">
+        <div class="col-xs-12">
+          <div class="exit" ng-click="tCtrl.delProjTog()"> x </div>
+        </div>
+      </div> -->
 
     </div>
-  </div>  
 
 
 
-  <!-- TIME LEFT PANEL -->
 
 
-  <div class="panel panel-default ">
-    <div class="panel-heading default-heading">
-      Time Left
+
+
+
+</div>
+
     </div>
-    <div class="panel-body">
 
 
-      <div class="dchart-container ">
-       <label class="chart-title">{{tCtrl.timeFromNow}}</label>
-       <canvas id="doughnut" chart-colors="tCtrl.chartcolorsTL" chart-options="tCtrl.chartoptionsTL" class="chart chart-doughnut" chart-data="tCtrl.chartdataTL"
-       chart-labels="tCtrl.chartlabelsTL"></canvas>
-     </div>
-     <div class="text-center">
-      <br>
-      <span class="tertiary-text">Todays Date: {{tCtrl.today}}</span> 
-      <br>
-      <span class="tertiary-text">Start Date {{tCtrl.createdDate}}</span>
-    </div>
+    <!-- end state 2 -->
   </div>
+  <!--end belt-->
+</div>
+<!-- end project info container -->
+
+
+
+</div>
+
+</div>
+
+
+
+
+
+<!-- TIME LEFT PANEL -->
+
+
+<div class="panel panel-default " ng-class="panelTimeLeft">
+  <div class="panel-heading default-heading">
+    Time Left
+  </div>
+  <div class="panel-body">
+
+
+    <div class="dchart-container ">
+     <label class="chart-title">{{tCtrl.timeFromNow}}</label>
+
+     <canvas id="doughnut" colours="tCtrl.tlChart.colours" options="tCtrl.tlChart.options" class="chart chart-doughnut" data="tCtrl.tlChart.data"
+     labels="tCtrl.tlChart.labels"></canvas>
+   </div>
+   <div class="text-center">
+    <br>
+    <span class="tertiary-text">Todays Date: {{tCtrl.today}}</span> 
+    <br>
+    <span class="tertiary-text">Start Date {{tCtrl.createdDate}}</span>
+  </div>
+</div>
 </div>
 
 
@@ -93,7 +203,7 @@
 
 
 
-<div class="panel panel-default ">
+<div class="panel panel-default " ng-class="panelHours">
   <div class="panel-heading default-heading">
     Total Hours
   </div>
@@ -102,10 +212,14 @@
 
     <div class="dchart-container">
      <label class="chart-title">{{tCtrl.totalHours}}</label>
-     <canvas id="doughnut" chart-colors="tCtrl.chartcolors" chart-options="tCtrl.chartoptions" class="chart chart-doughnut" chart-data="tCtrl.chartdata"
-     chart-labels="tCtrl.chartlabels"></canvas>
-   </div>
- </div>
+
+     <canvas id="doughnut" colours="tCtrl.hoursChart.colours" options="tCtrl.hoursChart.options" class="chart chart-doughnut" data="tCtrl.hoursChart.data"
+     labels="tCtrl.hoursChart.labels"></canvas>
+
+<!-- 
+  <canvas id="locationBar" class="chart chart-bar" data="tCtrl.chartParams.votes" labels="tCtrl.chartParams.listOfLocations" series="ctCtrl.hartParams.series" colours="tCtrl.chartParams.colours" options="tCtrl.chartParams.options"></canvas> -->
+</div>
+</div>
 </div>
 
 
@@ -126,32 +240,32 @@
 <div class="col-xs-12 col-md-6">
   <div class="panel panel-default task-panel">
     <div class="panel-heading default-heading">Tasks </div>
-       <div class="row task-panel-header">
+    <div class="row task-panel-header">
 
 
-        <div class="col-xs-4">
+      <div class="col-xs-4">
 
 
-         <div class="dropdown">
-          <div class="default-btn"  class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Filter
-            <span class="caret"></span>
-          </div>
-          <ul class="dropdown-menu cat-select" aria-labelledby="dropdownMenu1">
-           <li>All Categories</li>
-           <li ng-repeat="cat in tCtrl.categories" ng-click="tCtrl.setCat(cat)" >{{cat}}</li>
-         </ul>
-       </div>
+       <div class="dropdown">
+        <div class="default-btn"  class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Filter
+          <span class="caret"></span>
+        </div>
+        <ul class="dropdown-menu cat-select" aria-labelledby="dropdownMenu1">
+         <li ng-click="tCtrl.setCat()">All Categories</li>
+         <li ng-repeat="cat in tCtrl.categories" ng-click="tCtrl.setCat(cat)" >{{cat}}</li>
+       </ul>
      </div>
+   </div>
 
 
 
-     <div class="col-xs-4">
-      <div class="default-btn" ng-click="tCtrl.showCompleted = !tCtrl.showCompleted">COMPLETED</div>
-    </div>
-    <div class="col-xs-4">
-      <div class="default-btn"  ng-click="tCtrl.exp = !tCtrl.exp"> <span class="new-pro-group">NEW<span id="new-pro-btn" class="circle-btn">+</span></span></div>
-    </div>
+   <div class="col-xs-4">
+    <div class="default-btn" ng-click="tCtrl.showCompleted = !tCtrl.showCompleted">COMPLETED</div>
+  </div>
+  <div class="col-xs-4">
+    <div class="default-btn"  ng-click="tCtrl.exp = !tCtrl.exp"> <span class="new-pro-group">NEW<span id="new-pro-btn" class="circle-btn">+</span></span></div>
+  </div>
 
 
 
@@ -173,6 +287,7 @@
     </div> -->
 
   </div>
+  <!-- end task panel header -->
 
 
 
@@ -181,8 +296,7 @@
 
 
 
-
-    <!-- NEW TASK CONTAINER -->
+  <!-- NEW TASK CONTAINER -->
   <div class=" row new-task-container" ng-class="[tCtrl.exp ? 'expand2' : 'contract2']" >
 
     <!-- ng-hide="!tCtrl.exp" -->
@@ -207,7 +321,7 @@
        <input class="new-minimal-input col-xs-6" type="text" placeholder="New Category" ng-model="tCtrl.newTodoCat" />
 
        <div class="dropdown col-xs-6">
-        <div class="default-btn"  class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <div class="default-btn" ng-click="tCtrl.catClicked = !tCtrl.catClicked">
           Category
           <span class="caret"></span>
         </div>
@@ -235,10 +349,31 @@
    </div>
 
 
+
  </div>
 
 
+
+ 
+
+
+
+
+ <div class="select-cat-modal-new" ng-class="[tCtrl.catClicked ? 's' : 'h']">
+  <div class="col-xs-12">
+    <div class="exit" ng-click="tCtrl.catClicked = !tCtrl.catClicked"> x </div>
+  </div>
+  <div class="all-cats-new">
+    <ul>
+     <li ng-repeat="cat in tCtrl.categories" ng-click="tCtrl.newTodoCat = cat; tCtrl.catClicked = !tCtrl.catClicked" >{{cat}}</li>
+   </ul>
+ </div>
 </div>
+
+
+</div>
+
+
 <div class="fade-down"></div>
 
 
@@ -249,12 +384,10 @@
 
 
 
-    <div class="panel-body task-panel-body ">
+<div class="panel-body task-panel-body ">
 
-      <!-- <div class="secondary-text header-numbers"> {{tCtrl.numCompleted("true") || 0}}/{{tCtrl.todos.length}}</div> -->
-      <!-- TASK PANEL HEADER -->
-   
-
+  <!-- <div class="secondary-text header-numbers"> {{tCtrl.numCompleted("true") || 0}}/{{tCtrl.todos.length}}</div> -->
+  <!-- TASK PANEL HEADER -->
 
 
 
@@ -271,11 +404,13 @@
 
 
 
-<!-- ALL TASKS CONTAINER -->
 
 
-<div class="row ">
-  <div class="col-xs-12 col-md-12">
+  <!-- ALL TASKS CONTAINER -->
+
+
+  <div class="row ">
+    <div class="col-xs-12 col-md-12">
 
 
 
@@ -284,7 +419,7 @@
       <div class="all-todos" ng-class="{'fadein' : tCtrl.todos.length > 0}">
        <div taskrow class="task" data-t="todo" ng-repeat="todo in tCtrl.todos | showComp:tCtrl.showCompleted |  filter: { category: tCtrl.catFilter } track by todo._id" >
         <div class="last-task"></div>
-       </div>
+      </div>
 
 
 
@@ -293,11 +428,11 @@
 
 
 
-   <br>
+      <br>
 
 
-</div>
-</div>
+    </div>
+  </div>
 
 
 </div>
@@ -316,6 +451,77 @@
 <!-- end panel body -->
 </div>
 <!-- end panel -->
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-default hours-by-cat-panel" ng-class="panelHoursByCat">
+  <div class="panel-heading default-heading">
+    Hours by Category
+  </div>
+  <div class="panel-body hours-by-cat-body ">
+
+<!--     <canvas id="bar" class="chart chart-bar"
+  chart-data="tCtrl.barChartData" chart-colors="tCtrl.barChartColors" options="tCtrl.barChartOptions" chart-labels=" tCtrl.barChartLabels" >
+
+</canvas> -->
+
+<canvas id="locationBar" class="chart chart-bar" data="tCtrl.chartParams.vals" labels="tCtrl.chartParams.keys" series="ctCtrl.hartParams.series" colours="tCtrl.chartParams.colours" options="tCtrl.chartParams.options"></canvas>
+<!-- chart-series="tCtrl.barChartSeries " -->
+</div>
+</div>
+<!-- 
+ <canvas id="doughnut" chart-colors="tCtrl.chartcolors" chart-options="tCtrl.chartoptions" class="chart chart-doughnut" chart-data="tCtrl.chartdata"
+     chart-labels="tCtrl.chartlabels"></canvas>
+
+   -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

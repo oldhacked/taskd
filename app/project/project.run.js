@@ -15,11 +15,11 @@
 
 
   /* @ngInject */
- export default function projectRoot($rootScope, authService, $location, $stateParams) {
+ export default function projectRoot($rootScope, authService, $location, $stateParams, ChartJsProvider) {
 
  	      
  	   	// $rootScope.$stateParams = $stateParams;
-       
+       $rootScope.chartsProvider = ChartJsProvider;
 
  	var derp = authService.tester(5);
  	console.log(derp);
@@ -33,4 +33,4 @@
  	});
  };
  
-projectRoot.$inject = ['$rootScope', 'authService', '$location', '$stateParams'];
+projectRoot.$inject = ['$rootScope', 'authService', '$location', '$stateParams', 'ChartJsProvider'];

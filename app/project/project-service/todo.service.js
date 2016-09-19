@@ -42,6 +42,17 @@ function todoService($http){
     });
   };
 
+  var updateProject = function(project, token) {
+  return $http({
+    method : 'PUT',
+    url : API_URL + '/projects',
+    headers : {
+      'Content-Type' : 'application/json',
+      'x-access-token' : token
+    },
+    data : project
+  })
+};
 
 
 ///////////////TODOS/////////////////////
@@ -98,6 +109,9 @@ return {
   getProjectStubs: getProjectStubs,
   createNewProject: createNewProject,
   getProjectById: getProjectById,
+  updateProject: updateProject,
+
+  
 
   removeTodo: removeTodo,
   getTodos: getTodos,

@@ -13,6 +13,8 @@ export default function todoCtrl($scope, todoService, $interval, $timeout, authS
 	console.log($rootScope.sParams.proj);
 	$scope.pid = $rootScope.sParams.proj;
 
+
+
 	//TODO SERVICE
 	tCtrl.getTodos = todoService.getTodos;
 	tCtrl.removeme = todoService.removeme;
@@ -22,7 +24,7 @@ export default function todoCtrl($scope, todoService, $interval, $timeout, authS
 	tCtrl.uid = tCtrl.user._id;
 	var token =  authService.getToken();
 
-	
+	tCtrl.visual = "h";
 
 ////////////////PROJECT/////////////////////
 
@@ -34,6 +36,13 @@ var dateFromObjectId = function (objectId) {
 tCtrl.project = {};
 tCtrl.todos = [];
 tCtrl.createdDate;
+
+tCtrl.panelTimeLeft = "h";
+tCtrl.panelTotalHours = "h";
+tCtrl.panelHoursByCat = "h";
+
+
+
 $scope.$watch("state", function(newValue, oldValue) {
 
 	console.log("state change: " + newValue + " " + oldValue);
@@ -49,23 +58,142 @@ $scope.$watch("state", function(newValue, oldValue) {
 			//assign due date to panel
 			tCtrl.timeFromNow = "Due: " + moment(tCtrl.project.dueDate).fromNow();
 			// assign due date to form
-			tCtrl.project.dueDateFormatted = moment(tCtrl.project.dueDate);
-			tallyUp();
-			timeLeftChart();
-			gatherCats();
+			// var ddate = new Date(tCtrl.project.dueDate);
 
+			tCtrl.project.dueDateFormatted = moment(tCtrl.project.dueDate).format("YYYY/MM/DD");
+			$timeout(function() {
+				tCtrl.panelTimeLeft = "s";
+				timeLeftChart();
+
+			}, 1000);
 
 			
-		}, handleError);
+
+			$timeout(function() {
+				tCtrl.panelTotalHours = "s";
+				tallyUp();
+			
+			}, 1000);
+
+		
+
+			$timeout(function() {
+				tCtrl.panelHoursByCat = "s";
+				gatherCats();
+			
+			}, 3000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}, handleError);
 	};
-$timeout(function() {
-	tCtrl.loadProject();
-}, 100);
+
+	$timeout(function() {
+		tCtrl.loadProject();
+	}, 100);
 	
 
 });
 
 tCtrl.editingProj = true;
+
+
+
+
+tCtrl.delProjClicked = false;
+
+tCtrl.projModal = "h"
+var done2 = false
+tCtrl.delProjTog = function(){
+	
+	console.log("delet project");
+	if(done2 == false){
+		tCtrl.projModal = "s";
+		done2 = true;
+
+	}else if(done2 == true){
+		tCtrl.projModal = "h";
+		done2 = false;
+	}
+}
+
+
+
+
+var done1 = false;
+
+tCtrl.tog = function(){
+  //jquery toggleClass does not work
+
+
+  if(done1 == false){
+  	$('#tog').addClass('is-transitioned');
+  	done1 = true;
+
+  }else if(done1 == true){
+  	$('#tog').removeClass('is-transitioned');
+  	tCtrl.editProj = {};
+  	done1 = false;
+  }
+
+};
+
+tCtrl.copyProj = function(){
+	tCtrl.editProj = angular.copy(tCtrl.project);
+}
+
+
+tCtrl.updateProj = function(project){
+
+	todoService.updateProject(project, token)
+	.then(function success(response) {
+
+		if(response.data){
+			console.log(response.data);
+			tCtrl.tog();
+
+			tCtrl.loadProject();
+		}
+
+	} );
+	// , function (response){tCtrl.newTaskAdvisory = response.data.stat;}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -75,23 +203,177 @@ tCtrl.categories = [];
 var uniqCats = [];
 function gatherCats(){
 
-	uniqCats = _.uniqBy(tCtrl.todos, 'category');
-
+	if(tCtrl.categories){
+		tCtrl.categories.length = 0;
+	}
+	if(uniqCats){
+		uniqCats.length = 0;
+	}
+	var temp = [];
+	temp =  _.uniqBy(tCtrl.todos, 'category');
+	uniqCats = angular.copy(temp);
 
 
 
 	_.forEach(uniqCats, function(value, key) {
-		tCtrl.categories.push(value.category)
+		tCtrl.categories.push(angular.copy(value.category));
 	});
 
 	console.log("unique categories: " + tCtrl.categories);
 	console.log(tCtrl.categories);
+	$timeout(function() {
+		hoursByCatChart();
+	}, 1500);
+	
 
 }
 
 tCtrl.setCat = function(cat){
 	tCtrl.catFilter = cat;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///ADDS HOUR PROPERTIES IN AN ARRAY
+function addThenConvert(arry, callback){
+
+	//will take an array of objects like { key: value, hours: 01:00:40 }
+	var ms = 0;
+	var totalMs = moment.duration(0, 'ms');
+
+	//will tally up each hours value 
+	_.forEach(arry, function(value, key) {
+		ms = moment.duration(value.hours).asMilliseconds();
+		totalMs = moment.duration(totalMs).add(ms, 'milliseconds');
+		
+	});
+	// then convert the value and return the total as well as a displayed value 
+	return callback(totalMs);
+}
+
+var convert = function(totes){
+	var d = moment.duration(totes);
+	var hours = Math.floor(d.asHours()) 
+	var minSec = moment.utc(d.asMilliseconds()).format(':mm:ss')
+
+	var obj = {
+		hours:  hours,
+		minSec: minSec,
+		totalMs: totes
+	};
+
+	return obj;
+}
+
+
+
+var hoursByCat = [];
+
+var catHoursArry = [];
+var keys = [];
+var vals = [];
+
+function tallyUpCats(cats, todos){
+
+
+	if(catHoursArry){
+		catHoursArry.length = 0;
+		keys.length = 0;
+		vals.length = 0;
+	}
+
+	for (var i = 0; i < cats.length; i++) {
+
+	////for each unique category 
+
+	_.forEach(todos, function(value, key) {
+
+		///if the category in the todos list matches the unique category 
+		if(value.category == cats[i]){
+
+			//push the hours value into an array of objects so it can be tallied up by addThenConvert()
+
+			catHoursArry.push({hours: value.hours})
+
+
+		}
+
+	});
+
+	keys.push(cats[i]);
+	vals.push(addThenConvert(catHoursArry, convert).hours);
+	catHoursArry.length = 0;
+};
+
+///should return an object like {keys: ['cat', 'cat'], vals: [catHours, catHours]}
+
+var obj = {
+	keys: keys,
+	vals: vals
+}
+
+return obj
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -127,14 +409,17 @@ tCtrl.newTaskAdvisory = "";
 			tCtrl.todos = response.data;
 			console.log(response.data);
 			tallyUp();
+			gatherCats();
 		});
 	};
 
 
 //////////////
-	tCtrl.newTaskCancel = function(){
-		tCtrl.newTaskAdvisory = tCtrl.newTodoTitle = tCtrl.newTodoHours = tCtrl.newTodoCat = tCtrl.newTodoSdate = tCtrl.newTodoEdate = tCtrl.newTodoNotes = '';
-	}
+tCtrl.newTaskCancel = function(){
+	tCtrl.newTaskAdvisory = tCtrl.newTodoTitle = tCtrl.newTodoHours = tCtrl.newTodoCat = tCtrl.newTodoSdate = tCtrl.newTodoEdate = tCtrl.newTodoNotes = '';
+}
+
+tCtrl.catClicked = false;
 	//ADD TODO
 	tCtrl.newtask;
 	tCtrl.addTodo = function (newTodoTitle, newTodoCat, newTodoNotes) {
@@ -212,6 +497,24 @@ tCtrl.newTaskAdvisory = "";
 
 	tCtrl.save = function (todo) {
 		console.log("task was edited");
+
+
+		var concat = todo.hr + ":" + todo.min + ":" + todo.sec;
+
+		var todo = {
+			pid: $scope.pid,
+			_id: todo._id,
+			task: todo.task,
+			category: todo.category,
+			hours: concat,
+			lastStart: todo.lastStart,
+			recording: todo.recording,
+			completed: todo.completed,
+			notes: todo.notes
+		}
+
+
+
 		todoService.updatetodo(angular.copy(todo), token);
 		tCtrl.loadTodos();
 		tCtrl.cancel();
@@ -315,6 +618,37 @@ tCtrl.newTaskAdvisory = "";
 // var x = moment.duration(formConcat).asMilliseconds();
 // var dur = Math.floor(d.asHours()) + moment.utc(x).format(":mm:ss");
 
+function hoursByCatChart(){
+
+	var tally = tallyUpCats(tCtrl.categories, tCtrl.todos);
+
+
+	//add ex
+	// if(tally.keys.length < 6){
+
+
+	// 	while(tally.keys.length < 6){
+
+	// 	}
+
+
+
+	// }
+
+	tCtrl.chartParams = {
+		keys: tally.keys,
+		vals: [tally.vals],
+		series: ["Hours sum"],
+		colours: [{fillColor:['#85C1BD', '#F3848E', '#F3AEA1', '#8ED8F7', '#B684BA', '#85C1BD']}],
+		options: {barShowStroke : false}
+	};
+
+};
+
+
+
+
+
 //TIME LEFT CHART
 function timeLeftChart(){
 		//get date created from objec id
@@ -345,14 +679,23 @@ function timeLeftChart(){
 		var tldAsHr = tlDuration.asHours();
 		// console.log("time left as hours: " + tldAsHr);
 		// console.log("!@#$" + [tldAsHr, difMsAsHr]);
+
+		tCtrl.tlChart = {
+			labels: ["time left " , " difference"],
+			colours: ['#85C1BD','#F3F5F6'],
+			data: [],       
+			options: {percentageInnerCutout : 90}
+		};
+
+
 		if(difMsAsHr > 0 && tldAsHr > 0){
-			tCtrl.chartdataTL = [tldAsHr, difMsAsHr];
+			tCtrl.tlChart.data = [tldAsHr, difMsAsHr];
 		}else{
-			tCtrl.chartdataTL = [0, 0];
+			tCtrl.tlChart.data = [0, 1];
 		}
-		tCtrl.chartlabelsTL = ["time left " , " difference"];
-		tCtrl.chartoptionsTL = {cutoutPercentage: 90};
-		tCtrl.chartcolorsTL = ['#85C1BD','#F3F5F6'];
+
+
+
 	}
 
 
@@ -360,55 +703,61 @@ function timeLeftChart(){
 
 
 //TOTAL HOURS CHART
-var fornow = 0;
-tCtrl.fudge = function(){
-	fornow = tCtrl.totalHours * 0.10
-	return fornow;
-}
-tCtrl.totalHours = 0;
-tCtrl.totalMs = 0;
-tCtrl.gms = 0;
+
+
+
 function tallyUp(){
-	var ms = 0;
-	var totalMs = moment.duration(0, 'ms');
-	function addThenConvert(callback){
+	
+	var chartObj = addThenConvert(tCtrl.todos, convert);
 
-		_.forEach(tCtrl.todos, function(value, key) {
-			ms = moment.duration(value.hours).asMilliseconds();
-			// console.log("value hours as ms: " + ms);
-			totalMs = moment.duration(totalMs).add(ms, 'milliseconds');
-			// console.log(totalMs);
-		});
 
-		callback(totalMs);
+	tCtrl.totalHours = chartObj.hours + chartObj.minSec;
+
+	tCtrl.hoursChart = {
+		labels: ["Hours", "Realative Average"],
+		colours: ['#B684BA','#F3F5F6'],
+		data: [],       
+		options: {percentageInnerCutout : 90}
+	};
+
+	if(chartObj.totalMs > 0){
+		tCtrl.hoursChart.data = [chartObj.totalMs, chartObj.totalMs * 0.10];
+	}else{
+		tCtrl.hoursChart.data = [0, 1];
 	}
 
-	var convert = function(totes){
-		// console.log(totes);
-		var d = moment.duration(totes);
-		tCtrl.totalMs = d;
-		var x = Math.floor(d.asHours()) 
-		// console.log(x);
 
-		var z = moment.utc(d.asMilliseconds()).format(':mm:ss')
-		tCtrl.gms = d.asMilliseconds();
-		// console.log("total duration: " + x + z);
-		// tCtrl.totalHours = x + z;
-		tCtrl.totalHours = x;
 
-		///////////////TOTAL HOURS CHART////////////////////////
-
-		tCtrl.chartlabels = ["hours", "Project Average"];
-		var aaa = parseInt(tCtrl.totalHours);
-
-		tCtrl.chartdata = [aaa, aaa * 0.10];
-
-		tCtrl.chartoptions = {cutoutPercentage: 90};
-		tCtrl.chartcolors = ['#B684BA','#F3F5F6'];
-	}
-
-	addThenConvert(convert);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 $scope.$watch("[todos.hours]", function(newValue, oldValue) {

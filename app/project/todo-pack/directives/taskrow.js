@@ -3,21 +3,15 @@ import angular from 'angular';
 require('./taskrow.styles.scss');
 
 /* @ngInject */
-function taskrow( $interval, $compile, $animate) {
+function taskrow( $interval, $compile, $animate, $rootScope) {
 	
 	return {
-
-		
-
-
-
-
 
 
 
 		restrict: 'AE',
 		template: require('./taskrow.directive.html'),
-		// compile: function(cElement, cAttrs) {
+		// compile: function(scope, cElement, cAttrs) {
 		// 	console.log('how many times I am called');
 		// },
 		// replace: true,
@@ -33,24 +27,23 @@ function taskrow( $interval, $compile, $animate) {
 
 		link : function(scope, element, attrs, ctrl){
 
+		//PASS THE PARENT CONTROLLER TO THE DIRECTIVE
+		scope.ctrl = scope.$parent.tCtrl;
 
 		//STYLES
 		scope.exp = false;
-
-	
-
 		scope.editslide = false;
+		scope.catClicked = false;
 
-		scope.taskedit = {};
-		scope.edit = function(task){
-			scope.taskedit = angular.copy(task);
+
+
+
+		scope.catSel = function(cat){
+			scope.taskedit.category = cat;
+			scope.catClicked = false;
 		}
-
-		// [editslide ? 'expandmore' : 'expandless, 'exp ? 'expandouter' : 'contractouter']
-
 		scope.wrapper = function(){
 			
-
 			if (scope.exp != true){
 				scope.innertaskwrap = "contractouter";
 			}
@@ -66,31 +59,98 @@ function taskrow( $interval, $compile, $animate) {
 
 		};
 
-		scope.ctrl = scope.$parent.tCtrl;
-
-			//PASS THE PARENT CONTROLLER TO THE DIRECTIVE
 
 
-			scope.task = function() {
+		//PASS THIS TASK TO SCOPE
+		scope.task = function() {
 
-				return scope.t;
+			return scope.t;
+		};
+
+		function def(num){
+			console.log("num: " + num);
+
+			if(num < 10){
+				console.log("num is less than ten");
+				var sliceMe = "" + num;
+				console.log('slice me: ' + sliceMe);
+
+				var defnum = sliceMe.slice(-1)[0];
+				console.log('deformatted num: ' + defnum);
+				console.log("parsed defnum: " + parseInt(defnum)); 
+				return  parseInt(defnum);
+			}else{
+				console.log("number is greater than 10");
+				return num;
+			}
+
+			
+		}
+
+		//ANGULAR COPY THE TASK FOR EDITING
+		scope.taskedit = {};
+		scope.edit = function(task){
+			scope.taskedit = angular.copy(task);
+
+			var ms = moment.duration(scope.taskedit.hours);
+
+			var hrDec = ms.asHours();
+			var minDec = ms.asMinutes();
+			var secDec = ms.asSeconds();
+
+			var hr = Math.floor(ms.asHours());
+			console.log("hr: " + hr);
+			console.log("hrs as minuts: " + (hr * 60));
+			var rMin = Math.floor(minDec - (hr * 60));
+			console.log("rMin: " + rMin)
+
+			var min = Math.floor(ms.asMinutes());
+			
+			var rSec = Math.floor(secDec - (min * 60));
+			console.log("rsec: " + rSec);
+
+			scope.taskedit.hr = def(hr);
+			
+			scope.taskedit.min = def(rMin);
+			scope.taskedit.sec = def(rSec);
+
+			// scope.taskedit.hr = 0;
+			// scope.taskedit.min = 0;
+			// scope.taskedit.sec = 0;
+		}
+
+
+
+
+
+
+
+
+
+
+
+			// console.log("****************: " + [ moment.duration(scope.task.hours), moment.duration(scope.ctrl.gms)]);
+			// console.log("****************: " + [ moment.duration(scope.task().hours).asMilliseconds(), scope.ctrl.gms]);
+
+			scope.updateTime = function(){
+
+				var concat = scope.taskedit.hr + ":" + scope.taskedit.min + ":" + scope.taskedit.sec;
+				scope.swctrl.setTotalElapsed(concat, s);
 			};
-
-
-			scope.chartcolors =  ['#F3848E','#F3F5F6'];
-			scope.chartoptions = {cutoutPercentage: 82, tooltips: { enabled: false }};
-			scope.chartlabels = ['Hours', 'Relative Average'];
-
-
-
+			//TURN THIS TASK'S HOURS INTO MILLISECONDS
 			var hoursAsMs = moment.duration(scope.task().hours).asMilliseconds();
 			var totalAsMs = scope.ctrl.gms;
 			var average = totalAsMs / scope.ctrl.todos.length;
 
-			scope.chartdata = [ hoursAsMs, average];
 
-			// console.log("****************: " + [ moment.duration(scope.task.hours), moment.duration(scope.ctrl.gms)]);
-			// console.log("****************: " + [ moment.duration(scope.task().hours).asMilliseconds(), scope.ctrl.gms]);
+			scope.labels = ['Hours', 'Relative Average'];		
+			scope.colours = ['#F3848E','#F3F5F6'];
+			scope.data = [hoursAsMs, average]; 
+			scope.options = {percentageInnerCutout : 85};
+
+
+
+
 
 			if(scope.t.recording == true){
 				scope.swctrl.start();
@@ -149,15 +209,12 @@ function taskrow( $interval, $compile, $animate) {
 				// console.log("now - lastStart: " + mte);
 
 
-
-
-
-
-
 			}else{
 				scope.swctrl.setTotalElapsed(scope.task().hours, 0);
 			}
-			
+
+
+
 			// scope.t = attrs.title
 			// var tsk = $interpolate('task');
 			// scope.t = tsk(scope.$parent);
@@ -306,4 +363,12 @@ export default angular.module('directives.taskrow', [])
 }])
 .name;
 
-taskrow.$inject = ['$interval', '$compile', '$animate']
+// module.$inject = ['ChartJsProvider'];
+
+
+
+
+
+
+
+taskrow.$inject = ['$interval', '$compile', '$animate', '$rootScope']

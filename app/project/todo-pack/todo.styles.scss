@@ -4,7 +4,7 @@
 
 .fade-up{
 	position: absolute;
-	bottom: 21px;
+	bottom: 408px;
 	height: 150px;
 	left: 18px;
 	right: 18px;
@@ -63,6 +63,7 @@
 	height: 0px;
 	overflow: hidden;
 	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+	position: relative;
 }
 
 .expandiv2.fadeout2{
@@ -75,7 +76,7 @@
 
 
 .task-panel-body{
-	height: 956px;
+	height: 524px;
 	margin-right: -16px;
 	overflow-y: scroll;
 	overflow-x: hidden;
@@ -181,3 +182,214 @@ textarea {
 	background: darken(white, 2%);
 	
 }
+
+
+
+
+
+////////////new task cat select
+
+.select-cat-modal-new{
+	opacity: 0;
+	position: absolute;
+	top: 134px;
+	left: 22px;
+	right: 19px;
+	padding: 5px;
+	background: white;
+	z-index: 240;
+	transition: all 1s cubic-bezier(0.21, 0.29, 0.2, 0.96);	
+}
+
+
+.all-cats-new{
+	background: white;
+	width: 100%;
+	height: 250px;
+	overflow: scroll;
+	margin-right: -16px;
+	overflow-x: hidden;
+}
+
+
+.all-cats-new li{
+	cursor: pointer;
+	padding: 5px;
+	@include secondaryDarkOnLight;
+	 list-style-type: none;
+	 overflow: hidden;
+
+
+}
+
+
+.all-cats-new li:hover{
+	background: darken(white, 2%);
+
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.hours-by-cat-panel{
+	height: 363px;
+}
+.hours-by-cat-body{
+	padding-right: 20px !important;
+}
+
+
+
+
+
+//project panel
+
+.project-panel-body{
+	position: relative;
+}
+.project-info-row{
+	margin: 10px 0px;
+}
+
+
+
+
+
+.project-info {
+	padding: 0;
+  overflow: hidden;
+}
+
+.project-info .belt {
+
+  width: 200%;
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.21, 0.29, 0.2, 0.96) 0.4s;
+}
+
+.project-info.state {
+  width: 50% !important;
+
+
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.project-info .state-1 {
+
+
+  transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+  opacity: 1;
+}
+
+
+
+.project-info .state-2 {
+
+  transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+   opacity: 0;
+}
+
+
+.project-info.is-transitioned .state-1 {
+
+
+ opacity: 0;
+}
+
+.project-info.is-transitioned .state-2 {
+
+
+ opacity: 1;
+}
+
+.project-info.is-transitioned .belt {
+  transform: translateX(-50%);
+}
+
+
+
+
+
+.del-proj-modal{
+	opacity: 0;
+	position: absolute;
+	top: -9px;
+	left: 0px;
+	right: 10px;
+	bottom: 0px;
+	padding: 5px;
+	background: white;
+	z-index: 240;
+	transition: all 1s cubic-bezier(0.21, 0.29, 0.2, 0.96);	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
