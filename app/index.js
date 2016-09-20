@@ -2,6 +2,7 @@
 //LIBS
 // import moment from 'moment/moment.js';
 // import angularMoment from 'angular-moment/angular-moment.js';
+
 // const momentTimezone = require('moment-timezone');
 import Bootstrap from 'bootstrap-sass/assets/javascripts/bootstrap';
 
@@ -27,12 +28,14 @@ import project from './project';
 	//direcives
 import taskrow from './project/todo-pack/directives/taskrow.js';
 
+import uiBootstrap from 'angular-ui-bootstrap';
+
 // import chartjs from 'chartjs';
 // import angularChartjs from 'angular-chartjs';
 
 
-
-angular.module('app', [uirouter, login, project, jwt, ngAnimate, taskrow])
+/*@ngInject*/
+angular.module('app', [uirouter, login, project, jwt, ngAnimate, taskrow, uiBootstrap])
 	.run(root)
 	.constant('API_URL','http://localhost:3000')
 	.config(routing);

@@ -1,8 +1,9 @@
-<!-- PROJECT PANEL -->
+
 <div class="col-xs-12 col-md-6">
+  <!-- PROJECT PANEL -->
   <div class="panel panel-default ">
     <div class="panel-heading aqua-heading">PROJECT
-        <div class="btn " ng-click="tCtrl.tog(); tCtrl.copyProj()">Edit</div>
+
     </div>
     <!-- <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> -->
     <!-- <div class="minimal-btn " ng-click="tCtrl.tog(); tCtrl.copyProj()">Edit</div> -->
@@ -15,154 +16,163 @@
         <div class="belt">
           <div class="state state-1">
 
-             <div class="col-xs-12 ">
-   
 
 
-            <div class="col-xs-12 project-info-row">
-              <span class="secondary-darker">Title: </span> <span class="secondary-text"> {{tCtrl.project.title}}</span>
-              
-          <!--     <div class="btn" ng-click="tCtrl.tog(); tCtrl.copyProj()">Edit</div> -->
+
+
+            <div class="info-half-left info-half">
+              <div class="project-info-row">
+                <span class="secondary-darker">Title: </span> <span class="secondary-text"> {{tCtrl.project.title}}</span>
+
+                <!--     <div class="btn" ng-click="tCtrl.tog(); tCtrl.copyProj()">Edit</div> -->
+              </div>
+              <div class="project-info-row">
+                <span class="secondary-darker">Client: </span> <span class="secondary-text"> {{tCtrl.project.client}}</span>
+              </div>
+
+
+
+
+              <div class="project-info-row">
+               <span class="secondary-darker">Due Date: </span> <span class="secondary-text"> {{tCtrl.project.dueDateFormatted}}</span>
+             </div>
+
+             <div class="project-info-row">
+              <span class="secondary-darker">Rate: </span> <span class="secondary-text"> {{tCtrl.project.rate}}</span>
             </div>
-            <div class="col-xs-12 project-info-row">
-              <span class="secondary-darker">Client: </span> <span class="secondary-text"> {{tCtrl.project.client}}</span>
-            </div>
+          </div>
 
 
-
-
-            <div class="col-xs-12 project-info-row">
-             <span class="secondary-darker">Due Date: </span> <span class="secondary-text"> {{tCtrl.project.dueDateFormatted}}</span>
-           </div>
-
-           <div class="col-xs-12 project-info-row">
-            <span class="secondary-darker">Rate: </span> <span class="secondary-text"> {{tCtrl.project.rate}}</span>
+          <div class="info-half-right info-half">
+            <div class="minimal-btn " ng-click="tCtrl.tog(); tCtrl.copyProj()">Edit</div>
           </div>
 
 
 
 
 
+
+        </div>
+
+        <!-- end state 1 -->
+
+
+        <div class="state state-2">
+
+          <div class="inner-state-2 marg-t-10">
+            <div class="flex-row">
+
+              <input class="minimal-input2 flex-row-item marg-r-10" type="text" placeholder="Project Title" ng-model="tCtrl.editProj.title"/>
+
+              <input  class="minimal-input2 flex-row-item" type="text" placeholder="Client" ng-model="tCtrl.editProj.client"/>
+            </div>
+
+
+            <div class="flex-row marg-b-10 marg-t-10">
+
+              <!-- <input class="minimal-input2 flex-row-item marg-r-10" type="date" placeholder="Date" name="date" ng-model="tCtrl.editProj.dueDate"/> -->
+
+
+
+
+
+
+
+
+
+
+
+
+              <div class=" derp flex-row">
+                <input type="text" class="minimal-input2 derp" readOnly ng-model="tCtrl.editProj.dueDate | date:'yyyy/MM/dd'"/>
+
+
+                <div class="minimal-btn" ng-click="tCtrl.projCalTog()"><i class="glyphicon glyphicon-calendar"></i></div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+              <div class="flex1 flex-row rate">
+
+                <input class="minimal-input2 flex-row-item" type="number" placeholder="Rate" ng-model="tCtrl.editProj.rate"/>
+              </div>
+
+            </div>
+
+
+
+            <div class="flex-row ">
+              <button class="default-btn-3rd flex-row-item marg-r-10" type="button" ng-click="tCtrl.tog()">Cancel</button>
+
+              <button class="default-btn-3rd flex-row-item" type="button" ng-click="tCtrl.delProjTog()">Delete</button>
+
+
+              <button class="default-btn-3rd flex-row-item marg-l-10" ng-click="tCtrl.updateProj(tCtrl.editProj)">Save</button>
+            </div>
           </div>
+
+
+
+        </div>
+
+
+        <!-- end state 2 -->
+      </div>
+      <!--end belt-->
+      <div class="proj-modal" ng-class="tCtrl.projModal">
+
+        <div class="col-xs-12 text-center primary-text marg-b-10">
+          Are you sure?
+        </div>
+        <br>
+        <div class="col-xs-12 text-center marg-b-10 marg-t-10">
+
+          <div class="col-xs-6">
+            <button class="default-btn col-xs-12 marg-r-10 marg-b-10" type="button" ng-click="tCtrl.delProjTog()">Nope</button>
+          </div>
+
+          <div class="col-xs-6">
+            <button class="default-btn col-xs-12 marg-l-10 marg-b-10" ng-click="pCtrl.deleteProj(tCtrl.editProj._id)">Yep</button> 
+          </div>
+
+        </div>
 
       </div>
-      <!-- end state 1 -->
+      <div class="proj-cal-modal" ng-class="tCtrl.projCal" ng-click="tCtrl.projCalTog()">
 
-
-
-
-
-
-      <div class="state state-2">
-
-
-
-
-
-
-
-
-
- <div class="col-xs-12 ">
-
-
-
-
-          <div class="col-xs-12 ">
-          <input type="text" placeholder="Project Title" ng-model="tCtrl.editProj.title"/>
-        </div>
-
-        <div class="col-xs-12 project-info-row">
-          <input  type="text" placeholder="Client" ng-model="tCtrl.editProj.client"/>
-        </div>
-
-
-
-
-
-
-
-        <div class="col-xs-12 ">
-          <input  type="text" placeholder="Due Date" ng-model="tCtrl.editProj.dueDate"/>
-
-        </div>
-
-
-
-        <div class="col-xs-12 ">
-          <input type="text" placeholder="Rate" ng-model="tCtrl.editProj.rate"/>
-        </div>
-
-
-       
-
-
-
-
-
-
-
-
-
-
-
-
+        <div class="col-xs-12 text-center marg-b-10 marg-t-10">
 
           <div class="col-xs-12">
-        <div class="col-xs-4">
-          <button class="default-btn " type="button" ng-click="tCtrl.tog()">Cancel</button>
+            <div style="display:inline-block; min-height:290px;">
+              <div uib-datepicker ng-model="tCtrl.editProj.dueDate"  datepicker-options="options"></div>
+            </div>
+          </div>
+
+        
+
         </div>
 
-   
+      </div>
 
 
-        <div class="col-xs-4">
-          <button class="default-btn " type="button" ng-click="tCtrl.delProjTog()">Delete</button>
-        </div>
-
- 
-
-
-        <div class="col-xs-4">
-          <button class=" default-btn  " ng-click="tCtrl.updateProj(tCtrl.editProj)">Save</button>
-        </div>
-
-    
-
-
-
-
-   <!--    <div class="del-proj-modal" ng-class="tCtrl.projModal">
-        <div class="col-xs-12">
-          <div class="exit" ng-click="tCtrl.delProjTog()"> x </div>
-        </div>
-      </div> -->
 
     </div>
+    <!-- end project info container -->
 
 
 
-
-
-
-
-
-</div>
-
-    </div>
-
-
-    <!-- end state 2 -->
   </div>
-  <!--end belt-->
+  <!-- end panel body -->
 </div>
-<!-- end project info container -->
-
-
-
-</div>
-
-</div>
+<!-- end panel -->
 
 
 
@@ -186,9 +196,9 @@
    </div>
    <div class="text-center">
     <br>
-    <span class="tertiary-text">Todays Date: {{tCtrl.today}}</span> 
+    <span class="tertiary-text">Todays Date: {{tCtrl.today | date: 'fullDate'}}</span> 
     <br>
-    <span class="tertiary-text">Start Date {{tCtrl.createdDate}}</span>
+    <span class="tertiary-text">Start Date {{tCtrl.createdDate | date: 'fullDate'}}</span>
   </div>
 </div>
 </div>
@@ -234,10 +244,8 @@
 
 
 
-
-
 <!-- TASK PANEL -->
-<div class="col-xs-12 col-md-6">
+<div class="col-sm-12 col-lg-6">
   <div class="panel panel-default task-panel">
     <div class="panel-heading default-heading">Tasks </div>
     <div class="row task-panel-header">
@@ -461,7 +469,7 @@
 
 
 
-<div class="panel panel-default hours-by-cat-panel" ng-class="panelHoursByCat">
+<div class="panel panel-default hours-by-cat-panel fade-panel" ng-class="">
   <div class="panel-heading default-heading">
     Hours by Category
   </div>
@@ -485,33 +493,12 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
  </div>
+ <!-- end task panel -->
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 

@@ -61,39 +61,10 @@ $scope.$watch("state", function(newValue, oldValue) {
 			// var ddate = new Date(tCtrl.project.dueDate);
 
 			tCtrl.project.dueDateFormatted = moment(tCtrl.project.dueDate).format("YYYY/MM/DD");
-			$timeout(function() {
-				tCtrl.panelTimeLeft = "s";
-				timeLeftChart();
-
-			}, 1000);
-
-			
-
-			$timeout(function() {
-				tCtrl.panelTotalHours = "s";
-				tallyUp();
-			
-			}, 1000);
-
-		
-
-			$timeout(function() {
-				tCtrl.panelHoursByCat = "s";
-				gatherCats();
-			
-			}, 3000);
 
 
-
-
-
-
-
-
-
-
-
-
+			tCtrl.panelTimeLeft = "s";
+			timeLeftChart(true);
 
 
 
@@ -108,15 +79,12 @@ $scope.$watch("state", function(newValue, oldValue) {
 
 });
 
-tCtrl.editingProj = true;
-
-
 
 
 tCtrl.delProjClicked = false;
 
-tCtrl.projModal = "h"
-var done2 = false
+tCtrl.projModal = "h";
+var done2 = false;
 tCtrl.delProjTog = function(){
 	
 	console.log("delet project");
@@ -129,6 +97,26 @@ tCtrl.delProjTog = function(){
 		done2 = false;
 	}
 }
+
+
+
+
+
+tCtrl.projCal = "h";
+var done3 = false;
+tCtrl.projCalTog = function(){
+	
+	console.log("proj cal");
+	if(done3 == false){
+		tCtrl.projCal = "s";
+		done3 = true;
+
+	}else if(done3 == true){
+		tCtrl.projCal = "h";
+		done3 = false;
+	}
+}
+
 
 
 
@@ -153,6 +141,7 @@ tCtrl.tog = function(){
 
 tCtrl.copyProj = function(){
 	tCtrl.editProj = angular.copy(tCtrl.project);
+	tCtrl.editProj.dueDate = tCtrl.project.dueDateFormatted;
 }
 
 
@@ -196,12 +185,12 @@ tCtrl.updateProj = function(project){
 
 
 
-
 ////////////////CATEGORIES//////////////////////
 
 tCtrl.categories = [];
 var uniqCats = [];
-function gatherCats(){
+//hoursByCatChart > 
+function gatherCats(callback){
 
 	if(tCtrl.categories){
 		tCtrl.categories.length = 0;
@@ -219,66 +208,16 @@ function gatherCats(){
 		tCtrl.categories.push(angular.copy(value.category));
 	});
 
-	console.log("unique categories: " + tCtrl.categories);
-	console.log(tCtrl.categories);
-	$timeout(function() {
-		hoursByCatChart();
-	}, 1500);
-	
+
+//hoursByCatChart > 
+callback();
 
 }
+
 
 tCtrl.setCat = function(cat){
 	tCtrl.catFilter = cat;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -292,8 +231,7 @@ function addThenConvert(arry, callback){
 	//will tally up each hours value 
 	_.forEach(arry, function(value, key) {
 		ms = moment.duration(value.hours).asMilliseconds();
-		totalMs = moment.duration(totalMs).add(ms, 'milliseconds');
-		
+		totalMs = moment.duration(totalMs).add(ms, 'milliseconds');	
 	});
 	// then convert the value and return the total as well as a displayed value 
 	return callback(totalMs);
@@ -309,64 +247,70 @@ var convert = function(totes){
 		minSec: minSec,
 		totalMs: totes
 	};
-
 	return obj;
 }
 
 
 
 var hoursByCat = [];
-
 var catHoursArry = [];
 var keys = [];
 var vals = [];
 
 function tallyUpCats(cats, todos){
-
-
 	if(catHoursArry){
-		catHoursArry.length = 0;
-		keys.length = 0;
-		vals.length = 0;
+		catHoursArry.length = keys.length = vals.length = 0;
 	}
-
 	for (var i = 0; i < cats.length; i++) {
 
 	////for each unique category 
-
 	_.forEach(todos, function(value, key) {
-
 		///if the category in the todos list matches the unique category 
 		if(value.category == cats[i]){
-
 			//push the hours value into an array of objects so it can be tallied up by addThenConvert()
-
 			catHoursArry.push({hours: value.hours})
-
-
 		}
-
 	});
 
 	keys.push(cats[i]);
 	vals.push(addThenConvert(catHoursArry, convert).hours);
 	catHoursArry.length = 0;
 };
-
 ///should return an object like {keys: ['cat', 'cat'], vals: [catHours, catHours]}
-
 var obj = {
 	keys: keys,
 	vals: vals
 }
-
 return obj
-
 }
 
+tCtrl.catChartDone = false;
+tCtrl.hbcChartReady = 0;
+function hoursByCatChart(){
+	tCtrl.hbcChartReady = 1;
+	var tally = tallyUpCats(tCtrl.categories, tCtrl.todos);
+
+	tCtrl.chartParams = {
+		keys: tally.keys,
+		vals: [tally.vals],
+		series: ["Hours sum"],
+		colours: [{fillColor:['#85C1BD', '#F3848E', '#F3AEA1', '#8ED8F7', '#B684BA', '#85C1BD']}],
+		options: {
+			animationSteps: 20,
+			barShowStroke : false,
+			animationEasing: "easeOutQuart",
+			onAnimationComplete: function() {
+				tCtrl.catChartDone = true;
 
 
 
+
+			}
+
+		}
+
+	};
+};
 
 
 
@@ -409,7 +353,7 @@ tCtrl.newTaskAdvisory = "";
 			tCtrl.todos = response.data;
 			console.log(response.data);
 			tallyUp();
-			gatherCats();
+			gatherCats(hoursByCatChart);
 		});
 	};
 
@@ -618,39 +562,13 @@ tCtrl.catClicked = false;
 // var x = moment.duration(formConcat).asMilliseconds();
 // var dur = Math.floor(d.asHours()) + moment.utc(x).format(":mm:ss");
 
-function hoursByCatChart(){
-
-	var tally = tallyUpCats(tCtrl.categories, tCtrl.todos);
-
-
-	//add ex
-	// if(tally.keys.length < 6){
-
-
-	// 	while(tally.keys.length < 6){
-
-	// 	}
-
-
-
-	// }
-
-	tCtrl.chartParams = {
-		keys: tally.keys,
-		vals: [tally.vals],
-		series: ["Hours sum"],
-		colours: [{fillColor:['#85C1BD', '#F3848E', '#F3AEA1', '#8ED8F7', '#B684BA', '#85C1BD']}],
-		options: {barShowStroke : false}
-	};
-
-};
 
 
 
 
-
+tCtrl.tlChartDone = false;
 //TIME LEFT CHART
-function timeLeftChart(){
+function timeLeftChart(runNextOne){
 		//get date created from objec id
 		tCtrl.createdDate = new Date(dateFromObjectId($scope.pid));
 		/////////TIME LEFT CHART/////////
@@ -684,19 +602,35 @@ function timeLeftChart(){
 			labels: ["time left " , " difference"],
 			colours: ['#85C1BD','#F3F5F6'],
 			data: [],       
-			options: {percentageInnerCutout : 90}
-		};
+			options: {
+				percentageInnerCutout : 90,
+				animationSteps: 20,
+				animationEasing: "easeOutQuart",
+				onAnimationComplete: function(){
+					if(runNextOne == true){
+						tCtrl.panelTotalHours = "s";
+						tallyUp(true);
+					}
+				}}
+			};
 
 
-		if(difMsAsHr > 0 && tldAsHr > 0){
-			tCtrl.tlChart.data = [tldAsHr, difMsAsHr];
-		}else{
-			tCtrl.tlChart.data = [0, 1];
+
+
+
+
+
+
+
+			if(difMsAsHr > 0 && tldAsHr > 0){
+				tCtrl.tlChart.data = [tldAsHr, difMsAsHr];
+			}else{
+				tCtrl.tlChart.data = [0, 1];
+			}
+
+
+
 		}
-
-
-
-	}
 
 
 
@@ -704,9 +638,9 @@ function timeLeftChart(){
 
 //TOTAL HOURS CHART
 
+tCtrl.hChartDone = false;
 
-
-function tallyUp(){
+function tallyUp(next){
 	
 	var chartObj = addThenConvert(tCtrl.todos, convert);
 
@@ -717,18 +651,32 @@ function tallyUp(){
 		labels: ["Hours", "Realative Average"],
 		colours: ['#B684BA','#F3F5F6'],
 		data: [],       
-		options: {percentageInnerCutout : 90}
+		options: {
+			percentageInnerCutout : 90,
+			animationSteps: 20,
+			animationEasing: "easeOutQuart",
+			onAnimationComplete: function() {
+				tCtrl.hChartDone = true;
+				
+				if(next == true){
+					tCtrl.panelHoursByCat = "s";
+					gatherCats(hoursByCatChart);
+				}
+
+
+			}}
+		};
+
+		if(chartObj.totalMs > 0){
+			tCtrl.hoursChart.data = [chartObj.totalMs, chartObj.totalMs * 0.10];
+		}else{
+			tCtrl.hoursChart.data = [0, 1];
+		}
+
+
+
 	};
 
-	if(chartObj.totalMs > 0){
-		tCtrl.hoursChart.data = [chartObj.totalMs, chartObj.totalMs * 0.10];
-	}else{
-		tCtrl.hoursChart.data = [0, 1];
-	}
-
-
-
-};
 
 
 
@@ -738,35 +686,6 @@ function tallyUp(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$scope.$watch("[todos.hours]", function(newValue, oldValue) {
-
-	// console.log(newValue, oldValue);
-
-	tallyUp();
-
-});
 
 
 };

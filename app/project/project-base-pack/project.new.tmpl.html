@@ -1,7 +1,43 @@
     <div class="col-xs-12 col-md-6">
       <div class="panel panel-default ">
         <div class="panel-heading  aqua-heading">NEW PROJECT</div>
-        <div class="panel-body">
+        <div class="panel-body relative">
+
+
+
+          <div class="row">
+
+
+
+
+
+
+             <div class="col-xs-12">
+          <div class="col-xs-12">
+
+
+            <input placeholder="Title" class="minimal-input col-xs-12" type="text" ng-model="pCtrl.newProjTitle"/>
+            <div class="v-spacer-20"></div>
+            <input placeholder="Client" class="minimal-input col-xs-12" type="text" ng-model="pCtrl.newProjClient"/>
+            <div class="v-spacer-20"></div> 
+
+          </div>
+          </div>
+
+          <div class="col-xs-12">
+
+
+
+
+            <div class="col-xs-5">
+              <input type="text" placeholder="Due Date" class="minimal-input col-xs-12" readOnly ng-model="pCtrl.newProjDueDate | date:'yyyy/MM/dd'"/>
+            </div>
+            <div class="col-xs-2">
+              <div class="minimal-btn col-xs-12 marg-t-10" ng-click="pCtrl.projCalTog()"><i class="glyphicon glyphicon-calendar"></i></div>
+            </div>
+            <div class="col-xs-5">
+              <input placeholder="Rate" class="minimal-input col-xs-12" type="number" ng-model="pCtrl.newProjRate"/>
+            </div>
 
 
 
@@ -11,54 +47,25 @@
 
 
 
-          <form ng-submit="pCtrl.createNewProj(pCtrl.newProjTitle, pCtrl.newProjClient, pCtrl.newProjDueDate, pCtrl.newProjRate )" class="form-group">
+          </div>
+
+          <div class="col-xs-12">
+
+
+
+            <div class="v-spacer-20"></div>
 
             <div class="col-xs-12">
-
-
-              <input placeholder="Title" class="minimal-input col-xs-12" type="text" ng-model="pCtrl.newProjTitle"/>
-              <div class="v-spacer-20"></div>
-              <input placeholder="Client" class="minimal-input col-xs-12" type="text" ng-model="pCtrl.newProjClient"/>
-              <div class="v-spacer-20"></div> 
+              <div class="default-btn" ng-click="pCtrl.createNewProj(pCtrl.newProjTitle, pCtrl.newProjClient, pCtrl.newProjDueDate, pCtrl.newProjRate )">Create Project</div>
 
             </div>
 
 
-            <div class="col-xs-12">
-
-
-              <input placeholder="Due Date" class="minimal-input col-xs-6" type="text" ng-model="pCtrl.newProjDueDate"/>
-
-       
-
-              <input placeholder="Rate" class="minimal-input col-xs-6" type="text" ng-model="pCtrl.newProjRate"/>
 
 
 
-            </div>
 
-            <div class="col-xs-12">
-
-
-
-              <div class="v-spacer-20"></div>
-
-              <div class="row">
-                <button class="default-btn" type="submit">Create Project</button>
-
-              </div>
-              <div class="v-spacer-20"></div>
-
-              <div class="row">
-                <button class="default-btn">Cancel</button>
-              </div>
-
-
-            </div> 
-
-
-
-          </form>
+          </div> 
 
 
 
@@ -73,6 +80,28 @@
 
 
 
+
+
+
+
+        </div>
+
+        
+    <div class="proj-cal-modal" ng-class="pCtrl.projCal" ng-click="pCtrl.projCalTog()">
+
+      <div class="col-xs-12 text-center marg-b-10 marg-t-10">
+
+        <div class="col-xs-12">
+          <div style="display:inline-block; min-height:290px;">
+            <div uib-datepicker ng-model="pCtrl.newProjDueDate" datepicker-options="options"></div>
+          </div>
+        </div>
+
+        
+
+      </div>
+
+    </div>
 
 
 
@@ -80,19 +109,6 @@
       </div>
     </div>
 
-    <!-- 
-      <div class=" btn-container">
-          <div class="sonar-btn1" ng-click="pCtrl.sonarBtn($event)">
 
-            <div class="sonar1"></div>
-            <span class="sonar-txt">beeboop!</span>
-          </div>
-        </div>
 
-        <div class=" btn-container">
-          <div class="sonar-btn1" ng-click="pCtrl.sonarBtn($event)">
 
-            <div class="sonar1"></div>
-            <span class="sonar-txt">beeboop!</span>
-          </div>
-        </div> -->

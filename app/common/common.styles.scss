@@ -64,7 +64,7 @@ $panelGray: #DDE1E2;
 
 
 .panel{
-    min-width: 500px !important;
+    // min-width: 500px !important;
 }
 
 
@@ -79,6 +79,10 @@ $thinLightBorder: 1px solid $lighterCoolGray !important;
   border-left: $noBorder;
   border-bottom: $thinLightBorder;
 }
+
+
+
+
 
 
 @mixin text-3rd {
@@ -125,6 +129,10 @@ $thinLightBorder: 1px solid $lighterCoolGray !important;
   @include secondaryDarkOnLight;
 }
 
+.primary-text{
+    @include titleDarkOnLight;
+}
+
 
 
 
@@ -147,6 +155,45 @@ $thinLightBorder: 1px solid $lighterCoolGray !important;
     height: 16px;
     margin-bottom: 2px;
 }
+
+
+
+.btn-success{
+    background: $aqua !important;
+}
+
+
+.btn-danger{
+    background: $pinkRed !important;
+}
+
+.btn-info{
+    background: #8ED8F7 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

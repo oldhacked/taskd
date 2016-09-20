@@ -116,6 +116,32 @@
 
 
 
+.default-btn-3rd{
+  width: 30%;
+  height: 50px;
+  padding: 10px;
+  border: none;
+  background: $lighterCoolGray;
+  text-align: center;
+  text-transform: uppercase;
+  @include secondaryDarkOnLight;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.default-btn-3rd:hover {
+  background: darken( $lighterCoolGray, 3%);
+
+
+}
+
+
+
+
+
+
+
+
 
 
 .default-btn {
@@ -129,29 +155,29 @@
   text-transform: uppercase;
   @include secondaryDarkOnLight;
   cursor: pointer;
-    // box-shadow: 0px 15px 10px -10px rgba(0, 0, 0, 0.3);
-    transition: all 200ms ease-in-out;
-  }
-  .default-btn:hover {
-    background: darken( $lighterCoolGray, 3%);
-  // transform: scale(1.05);
-  // box-shadow: 0px 25px 15px -15px rgba(0, 0, 0, 0.3);
+  transition: all 200ms ease-in-out;
+}
+
+
+.default-btn:hover {
+  background: darken( $lighterCoolGray, 3%);
+
+
 }
 
 
 .minimal-btn {
-  margin: 0 !important;
+  // margin: 0 !important;
   width: 66px;
-  position: absolute;
-  top: 0;
-  right: 54px;
-  height: 40px;
+  // position: absolute;
+  // top: 0;
+  // right: 54px;
+  // height: 40px;
   padding: 10px;
   border: $thinLightBorder;
-
   text-align: center;
   text-transform: uppercase;
-    color: $info-3rd !important;
+  color: $info-3rd !important;
   font-size: $tertiaryFontSize;
   font-weight: 100 !important;
   cursor: pointer;

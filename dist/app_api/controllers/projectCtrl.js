@@ -89,7 +89,8 @@ module.exports.updateProject = function(req,res,next){
           uid: req.body.uid,
           title: req.body.title,
           client: req.body.client,
-          dueDate: req.body.dueDate
+          dueDate: req.body.dueDate,
+          rate: req.body.rate
       }
   },
         // options

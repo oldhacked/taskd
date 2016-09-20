@@ -216,8 +216,8 @@ textarea {
 	cursor: pointer;
 	padding: 5px;
 	@include secondaryDarkOnLight;
-	 list-style-type: none;
-	 overflow: hidden;
+	list-style-type: none;
+	overflow: hidden;
 
 
 }
@@ -232,14 +232,41 @@ textarea {
 
 
 
+.fade-panel{
+	// display: none;
+	// opacity: 0;
+
+}
+
+.panel{
+	border-radius: 0px !important;
+}
+.panel-heading{
+	border-radius: 0px !important;
+}
 
 
 
 
+.fade-panel.ready{
+	animation: f-in 0.5s ease-out forwards;
+}
 
 
 
-
+@keyframes f-in{
+	0%{
+		display: none;
+		opacity: 0;
+	}
+	10%{
+		display: block;
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
 
 
 
@@ -279,89 +306,157 @@ textarea {
 
 
 
+
+
+
+
 .project-info {
 	padding: 0;
-  overflow: hidden;
+	overflow: hidden;
 }
 
 .project-info .belt {
-
-  width: 200%;
-  display: flex;
-  transition: transform 0.5s cubic-bezier(0.21, 0.29, 0.2, 0.96) 0.4s;
+	width: 200%;
+	display: flex;
+	transition: transform 0.5s cubic-bezier(0.21, 0.29, 0.2, 0.96) 0.4s;
 }
 
-.project-info.state {
-  width: 50% !important;
+.project-info .state {
+	width: 50% !important;
+	height: 174px;
+	display: flex;
 
 
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
 }
 
+/*/////// state 1 /////////*/
 .project-info .state-1 {
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+	opacity: 1;
+	flex-flow: column wrap;
+	align-content: stretch;
+  //  justify-content: center;
 
-
-  transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
-  opacity: 1;
+}
+.info-half-right .minimal-btn{
+	float: right;
+}
+.info-half{
+	width: 50%;
 }
 
 
 
+/*/////// state 2 /////////*/
 .project-info .state-2 {
-
-  transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
-   opacity: 0;
+	transition: all 0.3s cubic-bezier(0.21, 0.29, 0.2, 0.96);
+	opacity: 0;
+}
+.inner-state-2{
+	display: flex;
+	flex: 1;
+	flex-direction: column;
 }
 
+.flex-row{
+	flex-direction: row;
+	display: flex;
+	flex-grow: 1;
+}
+.flex-row-item{
+	flex-grow: 1;
+}
+
+
+
+
+.marg-t-10{
+	margin-top: 10px;
+}
+.marg-r-10{
+	margin-right: 10px;
+}
+.marg-b-10{
+	margin-bottom: 10px;
+}
+
+.marg-l-10{
+	margin-left: 10px;
+}
 
 .project-info.is-transitioned .state-1 {
-
-
- opacity: 0;
+	opacity: 0;
 }
 
 .project-info.is-transitioned .state-2 {
-
-
- opacity: 1;
+	opacity: 1;
 }
 
 .project-info.is-transitioned .belt {
-  transform: translateX(-50%);
+	transform: translateX(-50%);
 }
 
 
-
-
-
-.del-proj-modal{
+.proj-modal{
 	opacity: 0;
 	position: absolute;
-	top: -9px;
+	top: 0px;
 	left: 0px;
-	right: 10px;
+	right: 0px;
 	bottom: 0px;
-	padding: 5px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	background: white;
+	z-index: 240;
+	transition: all 1s cubic-bezier(0.21, 0.29, 0.2, 0.96);	
+}
+.proj-cal-modal{
+	opacity: 0;
+	position: absolute;
+	top: -50px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
 	background: white;
 	z-index: 240;
 	transition: all 1s cubic-bezier(0.21, 0.29, 0.2, 0.96);	
 }
 
 
+.relative{
+  position: relative;
+}
+
+.uib-datepicker-popup.dropdown-menu{
+  margin-top: -130px !important;
+}
+
+.derp{
+	width: 100%;
+}
 
 
 
+.rate{
 
+	width: 100%;
+	margin-left: 12px;
+}
+.flex1{
+	flex-grow: 1;
+}
 
+.flex2{
+	flex-grow: 2;
+}
 
-
-
-
-
+.flex3{
+	flex-grow: 3;
+}
 
 
 

@@ -59,10 +59,131 @@ export default function projectCtrl($scope, todoService, authService, $rootScope
 	};
 
 
+	pCtrl.deleteProj = function(pid){
+		console.log(pid);
+		todoService.deleteProject(pid, pCtrl.token)
+		.then(function success(response) {
+
+			if(response.data){
+				$location.path("projects//new-project");
+				pCtrl.loadData();
+			}
+
+		});
+	};
+
+
+
 
 
 
 	pCtrl.loadData();
+
+
+
+
+
+
+
+
+
+	pCtrl.today = function() {
+		pCtrl.dt = new Date();
+	};
+	pCtrl.today();
+
+	pCtrl.clear = function() {
+		pCtrl.dt = null;
+	};
+
+	pCtrl.options = {
+		customClass: getDayClass,
+		minDate: new Date(),
+		showWeeks: true
+	};
+
+ // Disable weekend selection
+ function disabled(data) {
+ 	var date = data.date,
+ 	mode = data.mode;
+ 	return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+ }
+
+
+
+
+
+
+
+  // Disable weekend selection
+  function disabled(data) {
+  	var date = data.date,
+  	mode = data.mode;
+  	return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+  }
+
+
+
+
+
+  pCtrl.toggleMin = function() {
+  	pCtrl.options.minDate = pCtrl.options.minDate ? null : new Date();
+  };
+
+  pCtrl.toggleMin();
+
+
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var afterTomorrow = new Date();
+  afterTomorrow.setDate(tomorrow.getDate() + 1);
+  pCtrl.events = [
+  {
+  	date: tomorrow,
+  	status: 'full'
+  },
+  {
+  	date: afterTomorrow,
+  	status: 'partially'
+  }
+  ];
+
+  function getDayClass(data) {
+  	var date = data.date,
+  	mode = data.mode;
+  	if (mode === 'day') {
+  		var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+  		for (var i = 0; i < pCtrl.events.length; i++) {
+  			var currentDay = new Date(pCtrl.events[i].date).setHours(0,0,0,0);
+
+  			if (dayToCheck === currentDay) {
+  				return pCtrl.events[i].status;
+  			}
+  		}
+  	}
+
+  	return '';
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -122,37 +243,63 @@ export default function projectCtrl($scope, todoService, authService, $rootScope
 
 
 
-	function clearNewForm(){
+function clearNewForm(){
 
-		pCtrl.newProjTitle = "";
-		pCtrl.newProjClient = "";
-		pCtrl.newProjDueDate = "";
-		pCtrl.newProjRate = "";
+	pCtrl.newProjTitle = "";
+	pCtrl.newProjClient = "";
+	pCtrl.newProjDueDate = "";
+	pCtrl.newProjRate = "";
+};
+
+
+pCtrl.createNewProj = function(title, client, dueDate, rate){
+
+
+	var project = {
+
+		uid: pCtrl.uid,
+
+		title: title,
+		client: client,
+		dueDate: dueDate,
+		rate: rate
 	};
-
-
-	pCtrl.createNewProj = function(title, client, dueDate, rate){
-
-
-		var project = {
-
-			uid: pCtrl.uid,
-
-			title: title,
-			client: client,
-			dueDate: dueDate,
-			rate: rate
-		};
-		todoService.createNewProject(project, pCtrl.token)
-		.then(function success(response){
-			clearNewForm();
-			pCtrl.loadData();
-			console.log(response.data.title);
+	todoService.createNewProject(project, pCtrl.token)
+	.then(function success(response){
+		clearNewForm();
+		pCtrl.loadData();
+		console.log(response.data.title);
 			// $rootScope.projectId =
 			$state.go('base.projects.dashboard', {proj: response.data._id} );
 		});
 
-	};
+};
+
+
+
+
+pCtrl.projCal = "h";
+var done3 = false;
+pCtrl.projCalTog = function(){
+	
+	console.log("proj cal");
+	if(done3 == false){
+		pCtrl.projCal = "s";
+		done3 = true;
+
+	}else if(done3 == true){
+		pCtrl.projCal = "h";
+		done3 = false;
+	}
+}
+
+
+
+
+
+
+
+
 
 
 

@@ -54,6 +54,15 @@ function todoService($http){
   })
 };
 
+var deleteProject = function(pid, token) {
+  return $http({
+    method : 'DELETE',
+    url : API_URL + '/projects/' + pid,
+    headers : {
+      'x-access-token' : token
+    }
+  })
+};
 
 ///////////////TODOS/////////////////////
 
@@ -110,8 +119,7 @@ return {
   createNewProject: createNewProject,
   getProjectById: getProjectById,
   updateProject: updateProject,
-
-  
+  deleteProject: deleteProject,
 
   removeTodo: removeTodo,
   getTodos: getTodos,
